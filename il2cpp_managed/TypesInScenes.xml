@@ -1,0 +1,4 @@
+<linker>
+	<assembly fullname="System" preserve="nothing"/>
+	<assembly fullname="uWAVM" preserve="all"/>
+</linker>

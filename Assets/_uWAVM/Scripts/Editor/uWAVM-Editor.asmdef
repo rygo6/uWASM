@@ -1,0 +1,18 @@
+{
+    "name": "uWAVM-Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:16db88137fb540b4e9daa48efbf8bdbc"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
