@@ -12,7 +12,8 @@ namespace uWAVMTests
         
         void Update()
         {
-            SetRotation(0, m_YRotation += .1f * m_RotationSpeed, 0);
+            m_YRotation = m_YRotation + 1f;
+            SetRotation(0, m_YRotation, 0);
         }
 
         public int Add(int a, int b)

@@ -29,10 +29,10 @@ static Il2CppMethodPointer s_methodPointers[4] =
 };
 static const int32_t s_InvokerIndices[4] = 
 {
-	548,
-	219,
-	219,
-	548,
+	547,
+	218,
+	218,
+	547,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_uWAVMTests_CodeGenModule;
 const Il2CppCodeGenModule g_uWAVMTests_CodeGenModule = 

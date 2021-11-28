@@ -1,0 +1,1944 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wasmtime.Dotnet</name>
+    </assembly>
+    <members>
+        <member name="T:Wasmtime.Caller">
+            <summary>
+            Represents caller information for a function.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Caller.GetMemory(System.String)">
+            <summary>
+            Gets an exported memory of the caller by the given name.
+            </summary>
+            <param name="name">The name of the exported memory.</param>
+            <returns>Returns the exported memory if found or null if a memory of the requested name is not exported.</returns>
+        </member>
+        <member name="M:Wasmtime.Caller.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.CompilerStrategy">
+            <summary>
+            Represents the Wasmtime compiler strategy.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.CompilerStrategy.Auto">
+            <summary>
+            Automatically pick the compiler strategy.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.CompilerStrategy.Cranelift">
+            <summary>
+            Use the Cranelift compiler.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.CompilerStrategy.Lightbeam">
+            <summary>
+            Use the Lightbeam compiler.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.OptimizationLevel">
+            <summary>
+            Represents the Wasmtime optimization level.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.OptimizationLevel.None">
+            <summary>
+            Disable optimizations.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.OptimizationLevel.Speed">
+            <summary>
+            Optimize for speed.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.OptimizationLevel.SpeedAndSize">
+            <summary>
+            Optimize for speed and size.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.ProfilingStrategy">
+            <summary>
+            Represents the Wasmtime code profiling strategy.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ProfilingStrategy.None">
+            <summary>
+            Disable code profiling.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ProfilingStrategy.JitDump">
+            <summary>
+            Linux "jitdump" profiling.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ProfilingStrategy.VTune">
+            <summary>
+            VTune code profiling.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.Config">
+            <summary>
+            Represents a configuration used to create <see cref="T:Wasmtime.Engine"/> instances.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Config.#ctor">
+            <summary>
+            Creates a new configuration.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Config.WithDebugInfo(System.Boolean)">
+            <summary>
+            Sets whether or not to enable debug information.
+            </summary>
+            <param name="enable">True to enable debug information or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithInterruptability(System.Boolean)">
+            <summary>
+            Sets whether or not to enable interruptability of WebAssembly code.
+            </summary>
+            <param name="enable">True to enable interruptability or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithFuelConsumption(System.Boolean)">
+            <summary>
+            Sets whether or not to enable fuel consumption for WebAssembly code.
+            </summary>
+            <param name="enable">True to enable fuel consumption or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithMaximumStackSize(System.Int32)">
+            <summary>
+            Sets the maximum WebAssembly stack size.
+            </summary>
+            <param name="size">The maximum WebAssembly stack size, in bytes.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithWasmThreads(System.Boolean)">
+            <summary>
+            Sets whether or not enable WebAssembly threads support.
+            </summary>
+            <param name="enable">True to enable WebAssembly threads support or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithReferenceTypes(System.Boolean)">
+            <summary>
+            Sets whether or not enable WebAssembly reference types support.
+            </summary>
+            <param name="enable">True to enable WebAssembly reference types support or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithSIMD(System.Boolean)">
+            <summary>
+            Sets whether or not enable WebAssembly SIMD support.
+            </summary>
+            <param name="enable">True to enable WebAssembly SIMD support or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithBulkMemory(System.Boolean)">
+            <summary>
+            Sets whether or not enable WebAssembly bulk memory support.
+            </summary>
+            <param name="enable">True to enable WebAssembly bulk memory support or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithMultiValue(System.Boolean)">
+            <summary>
+            Sets whether or not enable WebAssembly multi-value support.
+            </summary>
+            <param name="enable">True to enable WebAssembly multi-value support or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithMultiMemory(System.Boolean)">
+            <summary>
+            Sets whether or not enable WebAssembly multi-memory support.
+            </summary>
+            <param name="enable">True to enable WebAssembly multi-memory support or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithModuleLinking(System.Boolean)">
+            <summary>
+            Sets whether or not enable WebAssembly module linking support.
+            </summary>
+            <param name="enable">True to enable WebAssembly module linking support or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithCompilerStrategy(Wasmtime.CompilerStrategy)">
+            <summary>
+            Sets the compiler strategy to use.
+            </summary>
+            <param name="strategy">The compiler strategy to use.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithCraneliftDebugVerifier(System.Boolean)">
+            <summary>
+            Sets whether or not enable the Cranelift debug verifier.
+            </summary>
+            <param name="enable">True to enable the Cranelift debug verifier or false to disable.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithOptimizationLevel(Wasmtime.OptimizationLevel)">
+            <summary>
+            Sets the optimization level to use.
+            </summary>
+            <param name="level">The optimization level to use.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithProfilingStrategy(Wasmtime.ProfilingStrategy)">
+            <summary>
+            Sets the profiling strategy to use.
+            </summary>
+            <param name="strategy">The profiling strategy to use.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithStaticMemoryMaximumSize(System.UInt64)">
+            <summary>
+            Sets the maximum size of static WebAssembly linear memories.
+            </summary>
+            <param name="size">The maximum size of static WebAssembly linear memories, in bytes.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithStaticMemoryGuardSize(System.UInt64)">
+            <summary>
+            Sets the maximum size of the guard region for static WebAssembly linear memories.
+            </summary>
+            <param name="size">The maximum guard region size for static WebAssembly linear memories, in bytes.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithDynamicMemoryGuardSize(System.UInt64)">
+            <summary>
+            Sets the maximum size of the guard region for dynamic WebAssembly linear memories.
+            </summary>
+            <param name="size">The maximum guard region size for dynamic WebAssembly linear memories, in bytes.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.WithCacheConfig(System.String)">
+            <summary>
+            Sets the path to the Wasmtime cache configuration to use.
+            </summary>
+            <remarks>
+            If the path is null, the default Wasmtime cache configuration will be used.
+            </remarks>
+            <param name="path">The path to the cache configuration file to use or null to load the default configuration.</param>
+            <returns>Returns the current config.</returns>
+        </member>
+        <member name="M:Wasmtime.Config.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.Engine">
+            <summary>
+            Represents the Wasmtime engine.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Engine.#ctor">
+            <summary>
+            Constructs a new default engine.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Engine.#ctor(Wasmtime.Config)">
+            <summary>
+            Constructs a new engine using the given configuration.
+            </summary>
+            <param name="config">The configuration to use for the engine.</param>
+            <remarks>This method will dispose the given configuration.</remarks>
+        </member>
+        <member name="M:Wasmtime.Engine.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.Export">
+            <summary>
+            Represents an export of a WebAssembly module or instance.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Export.Name">
+            <summary>
+            The name of the export.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Export.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.FunctionExport">
+            <summary>
+            Represents a function exported from a WebAssembly module or instance.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.FunctionExport.Parameters">
+            <summary>
+            The parameter of the exported WebAssembly function.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.FunctionExport.Results">
+            <summary>
+            The results of the exported WebAssembly function.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.GlobalExport">
+            <summary>
+            Represents a global variable exported from a WebAssembly module or instance.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.GlobalExport.Kind">
+            <summary>
+            The kind of value for the global variable.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.GlobalExport.Mutability">
+            <summary>
+            Gets the mutability of the global.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.MemoryExport">
+            <summary>
+            Represents a memory exported from a WebAssembly module or instance.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.MemoryExport.Minimum">
+            <summary>
+            The minimum memory size (in WebAssembly page units).
+            </summary>
+        </member>
+        <member name="P:Wasmtime.MemoryExport.Maximum">
+            <summary>
+            The maximum memory size (in WebAssembly page units).
+            </summary>
+        </member>
+        <member name="T:Wasmtime.TableExport">
+            <summary>
+            Represents a table exported from a WebAssembly module or instance.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TableExport.Kind">
+            <summary>
+            The value kind of the table.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TableExport.Minimum">
+            <summary>
+            The minimum number of elements in the table.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TableExport.Maximum">
+            <summary>
+            The maximum number of elements in the table.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.InstanceExport">
+            <summary>
+            Represents an instance exported from a WebAssembly module or instance.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.InstanceExport.Exports">
+            <summary>
+            The exports of the instance.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.ModuleExport">
+            <summary>
+            Represents a module exported from a WebAssembly module or instance.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.ModuleExport.Imports">
+            <summary>
+            The imports of the module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.ModuleExport.Exports">
+            <summary>
+            The exports of the module.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.Function">
+            <summary>
+            Represents a Wasmtime function.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback(Wasmtime.IStore,System.Action)">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``1(Wasmtime.IStore,System.Action{``0})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``2(Wasmtime.IStore,System.Action{``0,``1})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``3(Wasmtime.IStore,System.Action{``0,``1,``2})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``4(Wasmtime.IStore,System.Action{``0,``1,``2,``3})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``5(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``6(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``7(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``8(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``9(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``10(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``11(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``12(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``13(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``14(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``15(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``16(Wasmtime.IStore,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``1(Wasmtime.IStore,System.Func{``0})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``2(Wasmtime.IStore,System.Func{``0,``1})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``3(Wasmtime.IStore,System.Func{``0,``1,``2})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``4(Wasmtime.IStore,System.Func{``0,``1,``2,``3})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``5(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``6(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``7(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``8(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``9(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``10(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``11(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``12(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``13(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``14(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``15(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``16(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Function.FromCallback``17(Wasmtime.IStore,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})">
+            <summary>
+            Creates a function given a callback.
+            </summary>
+            <param name="store">The store to create the function in.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="P:Wasmtime.Function.Parameters">
+            <summary>
+            The parameters of the WebAssembly function.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Function.Results">
+            <summary>
+            The results of the WebAssembly function.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Function.IsNull">
+            <summary>
+            Determines if the underlying function reference is null.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Function.Null">
+            <summary>
+            Represents a null function reference.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Function.Invoke(Wasmtime.IStore,System.Object[])">
+            <summary>
+            Invokes the Wasmtime function.
+            </summary>
+            <param name="store">The store that owns this function.</param>
+            <param name="arguments">The array of arguments to pass to the function.</param>
+            <returns>
+              Returns null if the function has no return value.
+              Returns the value if the function returns a single value.
+              Returns an array of values if the function returns more than one value.
+            </returns>
+        </member>
+        <member name="T:Wasmtime.Mutability">
+            <summary>
+            Represents the mutability of a WebAssembly global value.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.Mutability.Immutable">
+            <summary>
+            The global value is immutable (i.e. constant).
+            </summary>
+        </member>
+        <member name="F:Wasmtime.Mutability.Mutable">
+            <summary>
+            The global value is mutable.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.Global">
+            <summary>
+            Represents a WebAssembly global value.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Global.#ctor(Wasmtime.IStore,Wasmtime.ValueKind,System.Object,Wasmtime.Mutability)">
+            <summary>
+            Creates a new WebAssembly global value.
+            </summary>
+            <param name="store">The store to create the global in.</param>
+            <param name="kind">The kind of value stored in the global.</param>
+            <param name="initialValue">The global's initial value.</param>
+            <param name="mutability">The mutability of the global being created.</param>
+        </member>
+        <member name="M:Wasmtime.Global.GetValue(Wasmtime.IStore)">
+            <summary>
+            Gets the value of the global.
+            </summary>
+            <param name="store">The store that owns the global.</param>
+            <returns>Returns the global's value.</returns>
+        </member>
+        <member name="M:Wasmtime.Global.SetValue(Wasmtime.IStore,System.Object)">
+            <summary>
+            Sets the value of the global.
+            </summary>
+            <param name="store">The store that owns the global.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="P:Wasmtime.Global.Kind">
+            <summary>
+            Gets the value kind of the global.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Global.Mutability">
+            <summary>
+            Gets the mutability of the global.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.Import">
+            <summary>
+            The base class for import types.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Import.ModuleName">
+            <summary>
+            The module name of the import.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Import.Name">
+            <summary>
+            The name of the import.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Import.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.FunctionImport">
+            <summary>
+            Represents a function imported to a WebAssembly module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.FunctionImport.Parameters">
+            <summary>
+            The parameter of the exported WebAssembly function.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.FunctionImport.Results">
+            <summary>
+            The results of the exported WebAssembly function.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.GlobalImport">
+            <summary>
+            Represents a global variable imported to a WebAssembly module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.GlobalImport.Kind">
+            <summary>
+            The kind of value for the global variable.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.GlobalImport.Mutability">
+            <summary>
+            Gets the mutability of the global.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.MemoryImport">
+            <summary>
+            Represents a memory imported to a WebAssembly module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.MemoryImport.Minimum">
+            <summary>
+            The minimum memory size (in WebAssembly page units).
+            </summary>
+        </member>
+        <member name="P:Wasmtime.MemoryImport.Maximum">
+            <summary>
+            The maximum memory size (in WebAssembly page units).
+            </summary>
+        </member>
+        <member name="T:Wasmtime.TableImport">
+            <summary>
+            Represents a table imported to a WebAssembly module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TableImport.Kind">
+            <summary>
+            The value kind of the table.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TableImport.Minimum">
+            <summary>
+            The minimum number of elements in the table.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TableImport.Maximum">
+            <summary>
+            The maximum number of elements in the table.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.InstanceImport">
+            <summary>
+            Represents an instance imported to a WebAssembly module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.InstanceImport.Exports">
+            <summary>
+            The exports of the instance.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.ModuleImport">
+            <summary>
+            Represents a module imported to a WebAssembly module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.ModuleImport.Imports">
+            <summary>
+            The imports of the module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.ModuleImport.Exports">
+            <summary>
+            The exports of the module.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.Instance">
+            <summary>
+            Represents an instantiated WebAssembly module.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Instance.#ctor(Wasmtime.IStore,Wasmtime.Module,System.Object[])">
+            <summary>
+            Creates a new WebAssembly instance.
+            </summary>
+            <param name="store">The store to create the instance in.</param>
+            <param name="module">The module to create the instance for.</param>
+            <param name="imports">The imports for the instance.</param>
+        </member>
+        <member name="M:Wasmtime.Instance.GetFunction(Wasmtime.IStore,System.String)">
+            <summary>
+            Gets an exported function from the instance.
+            </summary>
+            <param name="store">The store that owns the instance.</param>
+            <param name="name">The name of the exported function.</param>
+            <returns>Returns the function if a function of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Instance.GetTable(Wasmtime.IStore,System.String)">
+            <summary>
+            Gets an exported table from the instance.
+            </summary>
+            <param name="store">The store that owns the instance.</param>
+            <param name="name">The name of the exported table.</param>
+            <returns>Returns the table if a table of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Instance.GetMemory(Wasmtime.IStore,System.String)">
+            <summary>
+            Gets an exported memory from the instance.
+            </summary>
+            <param name="store">The store that owns the instance.</param>
+            <param name="name">The name of the exported memory.</param>
+            <returns>Returns the memory if a memory of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Instance.GetGlobal(Wasmtime.IStore,System.String)">
+            <summary>
+            Gets an exported global from the instance.
+            </summary>
+            <param name="store">The store that owns the instance.</param>
+            <param name="name">The name of the exported global.</param>
+            <returns>Returns the global if a global of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Instance.GetInstance(Wasmtime.IStore,System.String)">
+            <summary>
+            Gets an exported instance from the instance.
+            </summary>
+            <param name="store">The store that owns the instance.</param>
+            <param name="name">The name of the exported instance.</param>
+            <returns>Returns the instance if a instance of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Instance.GetModule(Wasmtime.IStore,System.String)">
+            <summary>
+            Gets an exported module from the instance.
+            </summary>
+            <param name="store">The store that owns the instance.</param>
+            <param name="name">The name of the exported module.</param>
+            <returns>Returns the module if a module of that name was exported or null if not.</returns>
+        </member>
+        <member name="T:Wasmtime.Linker">
+            <summary>
+            Represents the Wasmtime linker that can be used to define imports
+            and instantiate WebAssembly modules.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Linker.#ctor(Wasmtime.Engine)">
+            <summary>
+            Constructs a new linker from the given engine.
+            </summary>
+            <param name="engine">The Wasmtime engine to use for the linker.</param>
+        </member>
+        <member name="P:Wasmtime.Linker.AllowShadowing">
+            <summary>
+            Configures whether or not the linker allows later definitions to shadow previous definitions.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Linker.Define(System.String,System.String,System.Object)">
+            <summary>
+            Defines an item in the linker.
+            </summary>
+            <param name="module">The module name of the item.</param>
+            <param name="name">The name of the item.</param>
+            <param name="item">The item being defined (e.g. function, global, table, etc.).</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction(System.String,System.String,System.Action)">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``1(System.String,System.String,System.Action{``0})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``2(System.String,System.String,System.Action{``0,``1})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``3(System.String,System.String,System.Action{``0,``1,``2})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``4(System.String,System.String,System.Action{``0,``1,``2,``3})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``5(System.String,System.String,System.Action{``0,``1,``2,``3,``4})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``6(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``7(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``8(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``9(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``10(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``11(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``12(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``13(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``14(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``15(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``16(System.String,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``1(System.String,System.String,System.Func{``0})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``2(System.String,System.String,System.Func{``0,``1})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``3(System.String,System.String,System.Func{``0,``1,``2})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``4(System.String,System.String,System.Func{``0,``1,``2,``3})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``5(System.String,System.String,System.Func{``0,``1,``2,``3,``4})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``6(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``7(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``8(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``9(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``10(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``11(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``12(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``13(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``14(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``15(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``16(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineFunction``17(System.String,System.String,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})">
+            <summary>
+            Defines a function in the linker.
+            </summary>
+            <remarks>Functions defined with this method are store-independent.</remarks>
+            <param name="module">The module name of the function.</param>
+            <param name="name">The name of the function.</param>
+            <param name="callback">The callback for when the function is invoked.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineWasi">
+            <summary>
+            Defines WASI functions in the linker.
+            </summary>
+            <remarks>
+            When WASI functions are defined in the linker, a store must be configured with a WASI
+            configuration.
+            </remarks>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineInstance(Wasmtime.IStore,System.String,Wasmtime.Instance)">
+            <summary>
+            Defines an instance with the specified name in the linker.
+            </summary>
+            <param name="store">The store that owns the instance.</param>
+            <param name="name">The name of the instance to define.</param>
+            <param name="instance">The instance to define.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.Instantiate(Wasmtime.IStore,Wasmtime.Module)">
+            <summary>
+            Instantiates a module with imports from items defined in the linker.
+            </summary>
+            <param name="store">The store to instantiate in.</param>
+            <param name="module">The module to instantiate.</param>
+            <returns>Returns the new instance.</returns>
+        </member>
+        <member name="M:Wasmtime.Linker.DefineModule(Wasmtime.IStore,Wasmtime.Module)">
+            <summary>
+            Defines automatic instantiations of a module in this linker.
+            </summary>
+            <param name="store">The store to instantiate in.</param>
+            <param name="module">The module to automatically instantiate.</param>
+        </member>
+        <member name="M:Wasmtime.Linker.GetDefaultFunction(Wasmtime.IStore,System.String)">
+            <summary>
+            Gets the "default" function export for a module with the given name defined in the linker.
+            </summary>
+            <param name="store">The store for the function.</param>
+            <param name="name">Tha name of the module to get the default function export.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wasmtime.Linker.GetFunction(Wasmtime.IStore,System.String,System.String)">
+            <summary>
+            Gets an exported function from the linker.
+            </summary>
+            <param name="store">The store of the function.</param>
+            <param name="module">The module of the exported function.</param>
+            <param name="name">The name of the exported function.</param>
+            <returns>Returns the function if a function of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Linker.GetTable(Wasmtime.IStore,System.String,System.String)">
+            <summary>
+            Gets an exported table from the linker.
+            </summary>
+            <param name="store">The store of the table.</param>
+            <param name="module">The module of the exported table.</param>
+            <param name="name">The name of the exported table.</param>
+            <returns>Returns the table if a table of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Linker.GetMemory(Wasmtime.IStore,System.String,System.String)">
+            <summary>
+            Gets an exported memory from the linker.
+            </summary>
+            <param name="store">The store of the memory.</param>
+            <param name="module">The module of the exported memory.</param>
+            <param name="name">The name of the exported memory.</param>
+            <returns>Returns the memory if a memory of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Linker.GetGlobal(Wasmtime.IStore,System.String,System.String)">
+            <summary>
+            Gets an exported global from the linker.
+            </summary>
+            <param name="store">The store of the global.</param>
+            <param name="module">The module of the exported global.</param>
+            <param name="name">The name of the exported global.</param>
+            <returns>Returns the global if a global of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Linker.GetInstance(Wasmtime.IStore,System.String,System.String)">
+            <summary>
+            Gets an exported instance from the linker.
+            </summary>
+            <param name="store">The store of the instance.</param>
+            <param name="module">The module name of the exported instance.</param>
+            <param name="name">The name of the exported instance.</param>
+            <returns>Returns the instance if a instance of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Linker.GetModule(Wasmtime.IStore,System.String,System.String)">
+            <summary>
+            Gets an exported module from the linker.
+            </summary>
+            <param name="store">The store of the module.</param>
+            <param name="module">The module name of the exported module.</param>
+            <param name="name">The name of the exported module.</param>
+            <returns>Returns the module if a module of that name was exported or null if not.</returns>
+        </member>
+        <member name="M:Wasmtime.Linker.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.Memory">
+            <summary>
+            Represents a WebAssembly memory.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Memory.#ctor(Wasmtime.IStore,System.UInt32,System.UInt32)">
+            <summary>
+            Creates a new WebAssembly memory.
+            </summary>
+            <param name="store">The store to create the memory in.</param>
+            <param name="minimum">The minimum number of WebAssembly pages.</param>
+            <param name="maximum">The maximum number of WebAssembly pages.</param>
+        </member>
+        <member name="F:Wasmtime.Memory.PageSize">
+            <summary>
+            The size, in bytes, of a WebAssembly memory page.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Memory.Minimum">
+            <summary>
+            The minimum memory size (in WebAssembly page units).
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Memory.Maximum">
+            <summary>
+            The maximum memory size (in WebAssembly page units).
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Memory.GetSize(Wasmtime.IStore)">
+            <summary>
+            Gets the current size of the memory, in WebAssembly page units.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <returns>Returns the current size of the memory, in WebAssembly page units.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.GetSpan(Wasmtime.IStore)">
+             <summary>
+             Gets the span of the memory.
+             </summary>
+             <param name="store">The store that owns the memory.</param>
+             <returns>Returns the span of the memory.</returns>
+             <remarks>
+             The span may become invalid if the memory grows.
+            
+             This may happen if the memory is explicitly requested to grow or
+             grows as a result of WebAssembly execution.
+            
+             Therefore, the returned span should not be used after calling the grow method or
+             after calling into WebAssembly code.
+             </remarks>
+        </member>
+        <member name="M:Wasmtime.Memory.ReadString(Wasmtime.IStore,System.Int32,System.Int32)">
+            <summary>
+            Reads a UTF-8 string from memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to read from.</param>
+            <param name="length">The length of bytes to read.</param>
+            <returns>Returns the string read from memory.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.ReadNullTerminatedString(Wasmtime.IStore,System.Int32)">
+            <summary>
+            Reads a null-terminated UTF-8 string from memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to read from.</param>
+            <returns>Returns the string read from memory.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.WriteString(Wasmtime.IStore,System.Int32,System.String)">
+            <summary>
+            Writes a UTF-8 string at the given address.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to write to.</param>
+            <param name="value">The string to write.</param>
+            <return>Returns the number of bytes written.</return>
+        </member>
+        <member name="M:Wasmtime.Memory.ReadByte(Wasmtime.IStore,System.Int32)">
+            <summary>
+            Reads a byte from memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to read from.</param>
+            <returns>Returns the byte read from memory.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.WriteByte(Wasmtime.IStore,System.Int32,System.Byte)">
+            <summary>
+            Writes a byte to memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to write to.</param>
+            <param name="value">The byte to write.</param>
+        </member>
+        <member name="M:Wasmtime.Memory.ReadInt16(Wasmtime.IStore,System.Int32)">
+            <summary>
+            Reads a short from memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to read from.</param>
+            <returns>Returns the short read from memory.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.WriteInt16(Wasmtime.IStore,System.Int32,System.Int16)">
+            <summary>
+            Writes a short to memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to write to.</param>
+            <param name="value">The short to write.</param>
+        </member>
+        <member name="M:Wasmtime.Memory.ReadInt32(Wasmtime.IStore,System.Int32)">
+            <summary>
+            Reads an int from memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to read from.</param>
+            <returns>Returns the int read from memory.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.WriteInt32(Wasmtime.IStore,System.Int32,System.Int32)">
+            <summary>
+            Writes an int to memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to write to.</param>
+            <param name="value">The int to write.</param>
+        </member>
+        <member name="M:Wasmtime.Memory.ReadInt64(Wasmtime.IStore,System.Int32)">
+            <summary>
+            Reads a long from memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to read from.</param>
+            <returns>Returns the long read from memory.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.WriteInt64(Wasmtime.IStore,System.Int32,System.Int64)">
+            <summary>
+            Writes a long to memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to write to.</param>
+            <param name="value">The long to write.</param>
+        </member>
+        <member name="M:Wasmtime.Memory.ReadIntPtr(Wasmtime.IStore,System.Int32)">
+            <summary>
+            Reads an IntPtr from memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to read from.</param>
+            <returns>Returns the IntPtr read from memory.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.WriteIntPtr(Wasmtime.IStore,System.Int32,System.IntPtr)">
+            <summary>
+            Writes an IntPtr to memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to write to.</param>
+            <param name="value">The IntPtr to write.</param>
+        </member>
+        <member name="M:Wasmtime.Memory.ReadSingle(Wasmtime.IStore,System.Int32)">
+            <summary>
+            Reads a single from memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to read from.</param>
+            <returns>Returns the single read from memory.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.WriteSingle(Wasmtime.IStore,System.Int32,System.Single)">
+            <summary>
+            Writes a single to memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to write to.</param>
+            <param name="value">The single to write.</param>
+        </member>
+        <member name="M:Wasmtime.Memory.ReadDouble(Wasmtime.IStore,System.Int32)">
+            <summary>
+            Reads a double from memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to read from.</param>
+            <returns>Returns the double read from memory.</returns>
+        </member>
+        <member name="M:Wasmtime.Memory.WriteDouble(Wasmtime.IStore,System.Int32,System.Double)">
+            <summary>
+            Writes a double to memory.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="address">The zero-based address to write to.</param>
+            <param name="value">The double to write.</param>
+        </member>
+        <member name="M:Wasmtime.Memory.Grow(Wasmtime.IStore,System.UInt32)">
+            <summary>
+            Grows the memory by the specified number of pages.
+            </summary>
+            <param name="store">The store that owns the memory.</param>
+            <param name="delta">The number of WebAssembly pages to grow the memory by.</param>
+            <returns>Returns the previous size of the Webassembly memory, in pages.</returns>
+            <remarks>This method will invalidate previously returned values from `GetSpan`.</remarks>
+        </member>
+        <member name="T:Wasmtime.Module">
+            <summary>
+            Represents a WebAssembly module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Module.Name">
+            <summary>
+            The name of the module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Module.Imports">
+            <summary>
+            The imports of the module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Module.Exports">
+            <summary>
+            The exports of the module.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Module.Validate(Wasmtime.Engine,System.ReadOnlySpan{System.Byte})">
+            <summary>
+            Validates the given WebAssembly module.
+            </summary>
+            <param name="engine">The engine to use for validation.</param>
+            <param name="bytes">The bytes of the WebAssembly module to validate.</param>
+            <returns>Returns null if the module is valid or an error message if the module is invalid.</returns>
+        </member>
+        <member name="M:Wasmtime.Module.FromBytes(Wasmtime.Engine,System.String,System.ReadOnlySpan{System.Byte})">
+            <summary>
+            Creates a <see cref="T:Wasmtime.Module"/> given the module name and bytes.
+            </summary>
+            <param name="engine">The engine to use for the module.</param>
+            <param name="name">The name of the module.</param>
+            <param name="bytes">The bytes of the module.</param>
+            <returns>Returns a new <see cref="T:Wasmtime.Module"/>.</returns>
+        </member>
+        <member name="M:Wasmtime.Module.FromFile(Wasmtime.Engine,System.String)">
+            <summary>
+            Creates a <see cref="T:Wasmtime.Module"/> given the path to the WebAssembly file.
+            </summary>
+            <param name="engine">The engine to use for the module.</param>
+            <param name="path">The path to the WebAssembly file.</param>
+            <returns>Returns a new <see cref="T:Wasmtime.Module"/>.</returns>
+        </member>
+        <member name="M:Wasmtime.Module.FromStream(Wasmtime.Engine,System.String,System.IO.Stream)">
+            <summary>
+            Creates a <see cref="T:Wasmtime.Module"/> from a stream.
+            </summary>
+            <param name="engine">The engine to use for the module.</param>
+            <param name="name">The name of the module.</param>
+            <param name="stream">The stream of the module data.</param>
+            <returns>Returns a new <see cref="T:Wasmtime.Module"/>.</returns>
+        </member>
+        <member name="M:Wasmtime.Module.FromText(Wasmtime.Engine,System.String,System.String)">
+            <summary>
+            Creates a <see cref="T:Wasmtime.Module"/> based on a WebAssembly text format representation.
+            </summary>
+            <param name="engine">The engine to use for the module.</param>
+            <param name="name">The name of the module.</param>
+            <param name="text">The WebAssembly text format representation of the module.</param>
+            <returns>Returns a new <see cref="T:Wasmtime.Module"/>.</returns>
+        </member>
+        <member name="M:Wasmtime.Module.FromTextFile(Wasmtime.Engine,System.String)">
+            <summary>
+            Creates a <see cref="T:Wasmtime.Module"/> based on the path to a WebAssembly text format file.
+            </summary>
+            <param name="engine">The engine to use for the module.</param>
+            <param name="path">The path to the WebAssembly text format file.</param>
+            <returns>Returns a new <see cref="T:Wasmtime.Module"/>.</returns>
+        </member>
+        <member name="M:Wasmtime.Module.FromTextStream(Wasmtime.Engine,System.String,System.IO.Stream)">
+            <summary>
+            Creates a <see cref="T:Wasmtime.Module"/> from a WebAssembly text format stream.
+            </summary>
+            <param name="engine">The engine to use for the module.</param>
+            <param name="name">The name of the module.</param>
+            <param name="stream">The stream of the module data.</param>
+            <returns>Returns a new <see cref="T:Wasmtime.Module"/>.</returns>
+        </member>
+        <member name="M:Wasmtime.Module.Serialize">
+            <summary>
+            Serializes the module to an array of bytes.
+            </summary>
+            <returns>Returns the serialized module as an array of bytes.</returns>
+        </member>
+        <member name="M:Wasmtime.Module.Deserialize(Wasmtime.Engine,System.String,System.ReadOnlySpan{System.Byte})">
+            <summary>
+            Deserializes a previously serialized module from a span of bytes.
+            </summary>
+            <param name="engine">The engine to use to deserialize the module.</param>
+            <param name="name">The name of the module being deserialized.</param>
+            <param name="bytes">The previously serialized module bytes.</param>
+            <returns>Returns the <see cref="T:Wasmtime.Module" /> that was previously serialized.</returns>
+            <remarks>The passed bytes must come from a previous call to <see cref="M:Wasmtime.Module.Serialize" />.</remarks>
+        </member>
+        <member name="M:Wasmtime.Module.DeserializeFile(Wasmtime.Engine,System.String,System.String)">
+            <summary>
+            Deserializes a previously serialized module from a file.
+            </summary>
+            <param name="engine">The engine to deserialize the module with.</param>
+            <param name="name">The name of the deserialized module.</param>
+            <param name="path">The path to the previously serialized module.</param>
+            <returns>Returns the <see cref="T:Wasmtime.Module" /> that was previously serialized.</returns>
+            <remarks>The file's contents must come from a previous call to <see cref="M:Wasmtime.Module.Serialize" />.</remarks>
+        </member>
+        <member name="M:Wasmtime.Module.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.StoreContext">
+            <summary>
+            Represents context about a <see cref="T:Wasmtime.Store"/>.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.InterruptHandle">
+            <summary>
+            Represents a Wasmtime interrupt handle.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.InterruptHandle.#ctor(Wasmtime.IStore)">
+            <summary>
+            Creates a new interrupt handle from the given store.
+            </summary>
+            <param name="store">The store to create the interrupt handle for.</param>
+        </member>
+        <member name="M:Wasmtime.InterruptHandle.Interrupt">
+            <summary>
+            Interrupt any executing WebAssembly code in the associated store.
+            </summary> 
+        </member>
+        <member name="M:Wasmtime.InterruptHandle.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.IStore">
+            <summary>
+            An interface implemented on types that behave like stores.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.IStore.Context">
+            <summary>
+            Gets the context of the store.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.Store">
+            <summary>
+            Represents a Wasmtime store.
+            </summary>
+            <remarks>
+            A Wasmtime store may be sent between threads but cannot be used from more than one thread
+            simultaneously.
+            </remarks>
+        </member>
+        <member name="M:Wasmtime.Store.#ctor(Wasmtime.Engine)">
+            <summary>
+            Constructs a new store.
+            </summary>
+            <param name="engine">The engine to use for the store.</param>
+        </member>
+        <member name="M:Wasmtime.Store.GC">
+            <summary>
+            Perform garbage collection within the given store.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Store.AddFuel(System.UInt64)">
+            <summary>
+            Adds fuel to this store for WebAssembly code to consume while executing.
+            </summary>
+            <param name="fuel">The fuel to add to the store.</param>
+        </member>
+        <member name="M:Wasmtime.Store.GetConsumedFuel">
+            <summary>
+            Gets the fuel consumed by the executing WebAssembly code.
+            </summary>
+            <returns>Returns the fuel consumed by the executing WebAssembly code or 0 if fuel consumption was not enabled.</returns>
+        </member>
+        <member name="M:Wasmtime.Store.SetWasiConfiguration(Wasmtime.WasiConfiguration)">
+            <summary>
+            Configres WASI within the store.
+            </summary>
+            <param name="config">The WASI configuration to use.</param>
+        </member>
+        <member name="M:Wasmtime.Store.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.Table">
+            <summary>
+            Represents a WebAssembly table.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Table.#ctor(Wasmtime.IStore,Wasmtime.ValueKind,System.Object,System.UInt32,System.UInt32)">
+            <summary>
+            Creates a new WebAssembly table.
+            </summary>
+            <param name="store">The store to create the table in.</param>
+            <param name="kind">The value kind for the elements in the table.</param>
+            <param name="initialValue">The initial value for elements in the table.</param>
+            <param name="initial">The number of initial elements in the table.</param>
+            <param name="maximum">The maximum number of elements in the table.</param>
+        </member>
+        <member name="P:Wasmtime.Table.Kind">
+            <summary>
+            Gets the value kind of the table.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Wasmtime.Table.Minimum">
+            <summary>
+            The minimum table element size.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.Table.Maximum">
+            <summary>
+            The maximum table element size.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Table.GetElement(Wasmtime.IStore,System.UInt32)">
+            <summary>
+            Gets an element from the table.
+            </summary>
+            <param name="store">The store that owns the table.</param>
+            <param name="index">The index in the table to get the element of.</param>
+            <returns>Returns the table element.</returns>
+        </member>
+        <member name="M:Wasmtime.Table.SetElement(Wasmtime.IStore,System.UInt32,System.Object)">
+            <summary>
+            Sets an element in the table.
+            </summary>
+            <param name="store">The store that owns the table.</param>
+            <param name="index">The index in the table to set the element of.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="M:Wasmtime.Table.GetSize(Wasmtime.IStore)">
+            <summary>
+            Gets the current size of the table.
+            </summary>
+            <param name="store">The store that owns the table.</param>
+            <value>Returns the current size of the table.</value>
+        </member>
+        <member name="M:Wasmtime.Table.Grow(Wasmtime.IStore,System.UInt32,System.Object)">
+            <summary>
+            Grows the table by the given number of elements.
+            </summary>
+            <param name="store">The store that owns the table.</param>
+            <param name="delta">The number of elements to grow the table.</param>
+            <param name="initialValue">The initial value for the new elements.</param>
+            <returns>Returns the previous number of elements in the table.</returns>
+        </member>
+        <member name="T:Wasmtime.TrapFrame">
+            <summary>
+            Represents a WebAssembly trap frame.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TrapFrame.FunctionOffset">
+            <summary>
+            Gets the frame's byte offset from the start of the function.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TrapFrame.FunctionName">
+            <summary>
+            Gets the frame's function name.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TrapFrame.ModuleOffset">
+            <summary>
+            Gets the frame's module offset from the start of the module.
+            </summary>
+        </member>
+        <member name="P:Wasmtime.TrapFrame.ModuleName">
+            <summary>
+            Gets the frame's module name.
+            </summary>
+        </member>
+        <member name="T:Wasmtime.TrapException">
+            <summary>
+            The exception for WebAssembly traps.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.TrapException.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:Wasmtime.TrapException.#ctor(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Wasmtime.TrapException.#ctor(System.String,System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Wasmtime.TrapException.Frames">
+            <summary>
+            Gets the trap's frames.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.TrapException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.ValueKind">
+            <summary>
+            Represents the possible kinds of WebAssembly values.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ValueKind.Int32">
+            <summary>
+            The value is a 32-bit integer.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ValueKind.Int64">
+            <summary>
+            The value is a 64-bit integer.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ValueKind.Float32">
+            <summary>
+            The value is a 32-bit floating point number.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ValueKind.Float64">
+            <summary>
+            The value is a 64-bit floating point number.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ValueKind.V128">
+            <summary>
+            The value is a 128-bit value representing the WebAssembly `v128` type.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ValueKind.FuncRef">
+            <summary>
+            The value is a function reference.
+            </summary>
+        </member>
+        <member name="F:Wasmtime.ValueKind.ExternRef">
+            <summary>
+            The value is an external reference.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.Value.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Wasmtime.WasiConfiguration">
+            <summary>
+            Represents a WASI configuration.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithArg(System.String)">
+            <summary>
+            Adds a command line argument to the configuration.
+            </summary>
+            <param name="arg">The command line argument to add.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithArgs(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds multiple command line arguments to the configuration.
+            </summary>
+            <param name="args">The command line arguments to add.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithArgs(System.String[])">
+            <summary>
+            Adds multiple command line arguments to the configuration.
+            </summary>
+            <param name="args">The command line arguments to add.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithArgs(System.ReadOnlySpan{System.String})">
+            <summary>
+            Adds multiple command line arguments to the configuration.
+            </summary>
+            <param name="args">The command line arguments to add.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithInheritedArgs">
+            <summary>
+            Sets the configuration to inherit command line arguments.
+            </summary>
+            <remarks>Any explicitly specified command line arguments will be removed.</remarks>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithEnvironmentVariable(System.String,System.String)">
+            <summary>
+            Adds an environment variable to the configuration.
+            </summary>
+            <param name="name">The name of the environment variable.</param>
+            <param name="value">The value of the environment variable.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithEnvironmentVariables(System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}})">
+            <summary>
+            Adds multiple environment variables to the configuration.
+            </summary>
+            <param name="vars">The name-value tuples of the environment variables to add.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithInheritedEnvironment">
+            <summary>
+            Sets the configuration to inherit environment variables.
+            </summary>
+            <remarks>Any explicitly specified environment variables will be removed.</remarks>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithStandardInput(System.String)">
+            <summary>
+            Sets the configuration to use the given file path as stdin.
+            </summary>
+            <param name="path">The file to use as stdin.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithInheritedStandardInput">
+            <summary>
+            Sets the configuration to inherit stdin.
+            </summary>
+            <remarks>Any explicitly specified stdin file will be removed.</remarks>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithStandardOutput(System.String)">
+            <summary>
+            Sets the configuration to use the given file path as stdout.
+            </summary>
+            <param name="path">The file to use as stdout.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithInheritedStandardOutput">
+            <summary>
+            Sets the configuration to inherit stdout.
+            </summary>
+            <remarks>Any explicitly specified stdout file will be removed.</remarks>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithStandardError(System.String)">
+            <summary>
+            Sets the configuration to use the given file path as stderr.
+            </summary>
+            <param name="path">The file to use as stderr.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithInheritedStandardError">
+            <summary>
+            Sets the configuration to inherit stderr.
+            </summary>
+            <remarks>Any explicitly specified stderr file will be removed.</remarks>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="M:Wasmtime.WasiConfiguration.WithPreopenedDirectory(System.String,System.String)">
+            <summary>
+            Adds a preopen directory to the configuration.
+            </summary>
+            <param name="path">The path to the directory to add.</param>
+            <param name="guestPath">The path the guest will use to open the directory.</param>
+            <returns>Returns the current configuration.</returns>
+        </member>
+        <member name="T:Wasmtime.WasmtimeException">
+            <summary>
+            The base type for Wasmtime exceptions.
+            </summary>
+        </member>
+        <member name="M:Wasmtime.WasmtimeException.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:Wasmtime.WasmtimeException.#ctor(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Wasmtime.WasmtimeException.#ctor(System.String,System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Wasmtime.WasmtimeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

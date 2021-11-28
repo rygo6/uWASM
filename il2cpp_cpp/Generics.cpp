@@ -282,14 +282,7 @@ struct InvokerActionInvoker2<T1*, T2*>
 	}
 };
 template <typename T1, typename T2, typename T3>
-struct InvokerActionInvoker3
-{
-	static inline void Invoke (Il2CppMethodPointer methodPtr, const RuntimeMethod* method, void* obj, T1 p1, T2 p2, T3 p3)
-	{
-		void* params[3] = { &p1, &p2, &p3 };
-		method->invoker_method(methodPtr, method, obj, params, NULL);
-	}
-};
+struct InvokerActionInvoker3;
 template <typename T1, typename T2, typename T3>
 struct InvokerActionInvoker3<T1*, T2*, T3*>
 {
@@ -301,15 +294,6 @@ struct InvokerActionInvoker3<T1*, T2*, T3*>
 };
 template <typename T1, typename T2, typename T3, typename T4>
 struct InvokerActionInvoker4;
-template <typename T1, typename T2, typename T3, typename T4>
-struct InvokerActionInvoker4<T1*, T2, T3, T4>
-{
-	static inline void Invoke (Il2CppMethodPointer methodPtr, const RuntimeMethod* method, void* obj, T1* p1, T2 p2, T3 p3, T4 p4)
-	{
-		void* params[4] = { p1, &p2, &p3, &p4 };
-		method->invoker_method(methodPtr, method, obj, params, NULL);
-	}
-};
 template <typename T1, typename T2, typename T3, typename T4>
 struct InvokerActionInvoker4<T1*, T2*, T3*, T4*>
 {
@@ -387,8 +371,6 @@ struct Action_1_t6F9EB113EB3F16226AEF811A2744F4111C116C87;
 struct Action_2_t156C43F079E7E68155FCDCD12DC77DD11AEF7E3C;
 // System.Action`3<System.Object,System.Object,System.Object>
 struct Action_3_tCDB60724FE7702C8848DCEE7A25283B015D0DA58;
-// System.Action`3<System.Single,System.Single,System.Single>
-struct Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E;
 // System.Buffers.ArrayPool`1<System.Byte>
 struct ArrayPool_1_t645A9854926DCA747C654687A362AD03D55D2C07;
 // System.Buffers.ArrayPool`1<System.Char>
@@ -3161,11 +3143,6 @@ struct Action_3_tCDB60724FE7702C8848DCEE7A25283B015D0DA58  : public MulticastDel
 {
 };
 
-// System.Action`3<System.Single,System.Single,System.Single>
-struct Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E  : public MulticastDelegate_t
-{
-};
-
 // System.Comparison`1<System.Object>
 struct Comparison_1_t62E531E7B8260E2C6C2718C3BDB8CF8655139645  : public MulticastDelegate_t
 {
@@ -5159,77 +5136,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Action_3__ctor_mFDF135E5454D50D572002F7C
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Action_3_Invoke_m399A0EB5E51EFD9B7D25DFE0EB7BF5EC0BE98346_gshared (Action_3_tCDB60724FE7702C8848DCEE7A25283B015D0DA58* __this, RuntimeObject* ___arg10, RuntimeObject* ___arg21, RuntimeObject* ___arg32, const RuntimeMethod* method) 
 {
 	typedef void (*FunctionPointerType) (Action_3_tCDB60724FE7702C8848DCEE7A25283B015D0DA58* __this, RuntimeObject* ___arg10, RuntimeObject* ___arg21, RuntimeObject* ___arg32, const RuntimeMethod* method);
-	((FunctionPointerType)__this->___invoke_impl_1)(__this, ___arg10, ___arg21, ___arg32, reinterpret_cast<RuntimeMethod*>(__this->___method_3));
-}
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-void Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_Multicast(Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* __this, float ___arg10, float ___arg21, float ___arg32, const RuntimeMethod* method)
-{
-	il2cpp_array_size_t length = __this->___delegates_13->max_length;
-	Delegate_t** delegatesToInvoke = reinterpret_cast<Delegate_t**>(__this->___delegates_13->GetAddressAtUnchecked(0));
-	typedef void (*FunctionPointerType) (Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* __this, float ___arg10, float ___arg21, float ___arg32, const RuntimeMethod* method);
-	for (il2cpp_array_size_t i = 0; i < length; i++)
-	{
-		Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* currentDelegate = reinterpret_cast<Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E*>(delegatesToInvoke[i]);
-		((FunctionPointerType)currentDelegate->___invoke_impl_1)(currentDelegate, ___arg10, ___arg21, ___arg32, method);
-	}
-}
-void Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_Open(Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* __this, float ___arg10, float ___arg21, float ___arg32, const RuntimeMethod* method)
-{
-	typedef void (*FunctionPointerType) (float, float, float, const RuntimeMethod*);
-	((FunctionPointerType)__this->___method_ptr_0)(___arg10, ___arg21, ___arg32, method);
-}
-void Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_Closed(Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* __this, float ___arg10, float ___arg21, float ___arg32, const RuntimeMethod* method)
-{
-	typedef void (*FunctionPointerType) (RuntimeObject*, float, float, float, const RuntimeMethod*);
-	((FunctionPointerType)__this->___method_ptr_0)(__this->___m_target_2, ___arg10, ___arg21, ___arg32, method);
-}
-void Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_OpenStaticInvoker(Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* __this, float ___arg10, float ___arg21, float ___arg32, const RuntimeMethod* method)
-{
-	InvokerActionInvoker3< float, float, float >::Invoke(__this->___method_ptr_0, method, NULL, ___arg10, ___arg21, ___arg32);
-}
-void Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_ClosedStaticInvoker(Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* __this, float ___arg10, float ___arg21, float ___arg32, const RuntimeMethod* method)
-{
-	InvokerActionInvoker4< RuntimeObject*, float, float, float >::Invoke(__this->___method_ptr_0, method, NULL, __this->___m_target_2, ___arg10, ___arg21, ___arg32);
-}
-// System.Void System.Action`3<System.Single,System.Single,System.Single>::.ctor(System.Object,System.IntPtr)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Action_3__ctor_mA1509E9324DF1AFB107FE5520FC1F249387BA2B3_gshared (Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* __this, RuntimeObject* ___object0, intptr_t ___method1, const RuntimeMethod* method) 
-{
-	__this->___method_ptr_0 = il2cpp_codegen_get_virtual_call_method_pointer((RuntimeMethod*)___method1);
-	__this->___method_3 = ___method1;
-	__this->___m_target_2 = ___object0;
-	Il2CppCodeGenWriteBarrier((void**)(&__this->___m_target_2), (void*)___object0);
-	int methodCount = il2cpp_codegen_method_parameter_count((RuntimeMethod*)___method1);
-	if (MethodIsStatic((RuntimeMethod*)___method1))
-	{
-		bool isOpen = methodCount == 3;
-		if (il2cpp_codegen_call_method_via_invoker((RuntimeMethod*)___method1))
-			if (isOpen)
-				__this->___invoke_impl_1 = (intptr_t)&Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_OpenStaticInvoker;
-			else
-				__this->___invoke_impl_1 = (intptr_t)&Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_ClosedStaticInvoker;
-		else
-			if (isOpen)
-				__this->___invoke_impl_1 = (intptr_t)&Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_Open;
-			else
-				__this->___invoke_impl_1 = (intptr_t)&Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_Closed;
-	}
-	else
-	{
-		__this->___invoke_impl_1 = (intptr_t)&Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_Closed;
-	}
-	__this->___extra_arg_5 = (intptr_t)&Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_Multicast;
-}
-// System.Void System.Action`3<System.Single,System.Single,System.Single>::Invoke(T1,T2,T3)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_gshared (Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* __this, float ___arg10, float ___arg21, float ___arg32, const RuntimeMethod* method) 
-{
-	typedef void (*FunctionPointerType) (Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* __this, float ___arg10, float ___arg21, float ___arg32, const RuntimeMethod* method);
 	((FunctionPointerType)__this->___invoke_impl_1)(__this, ___arg10, ___arg21, ___arg32, reinterpret_cast<RuntimeMethod*>(__this->___method_3));
 }
 #ifdef __clang__

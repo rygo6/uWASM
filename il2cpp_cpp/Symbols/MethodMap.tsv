@@ -3890,10 +3890,7 @@ __Error_WinIOError_m0B696531B376C3AA0615C6CEB0CC0068FDAA7D9D	System.Void System.
 __Il2CppComDelegate_Finalize_mC9F8EA94444C3AF0A43CC723A23EE4D8B7984F8C	System.Void System.__Il2CppComDelegate::Finalize()	__Generated
 __Il2CppComObject_Finalize_m720B2062F661A0770A32D24B731AD4AFE314A5CD	System.Void System.__Il2CppComObject::Finalize()	__Generated
 uWAVMBehavior__ctor_m45B10E80192E3C3F096C8776F6B02B1035589646	System.Void uWAVM.uWAVMBehavior::.ctor()	uWAVMBehaviour
-uWAVMBehavior_SetRotation_m7DCDAA6268F9F59F74A54BD35C1EBB2F5F3B4795	System.Int32 uWAVM.uWAVMBehavior::SetRotation(System.Single,System.Single,System.Single)	uWAVMBehaviour
-uWAVMBehavior_WEBGLFORSURE_m750E9187A5AFE88AE53315774BDD0457B6ECF462	System.Void uWAVM.uWAVMBehavior::WEBGLFORSURE()	uWAVMBehaviour
-uWAVMBehavior_add_onTransformRotationSet_mEDCA9623911123B82692099421A2095C19D6E07A	System.Void uWAVM.uWAVMBehavior::add_onTransformRotationSet(System.Action`3<System.Single,System.Single,System.Single>)	uWAVMBehaviour
-uWAVMBehavior_remove_onTransformRotationSet_m6187F2AC1688D7764A970378A7355608A30B280E	System.Void uWAVM.uWAVMBehavior::remove_onTransformRotationSet(System.Action`3<System.Single,System.Single,System.Single>)	uWAVMBehaviour
+uWAVMBehavior_SetRotation_m6D1BE4AD3EB53B8D4CE0A8BF783F44D2E0339530	System.Void uWAVM.uWAVMBehavior::SetRotation(System.Single,System.Single,System.Single)	uWAVMBehaviour
 ArrayEnumerator__ctor_m46B7521C341EDDCFB51486ECCCFC92E8FF4FEDF6	System.Void System.Array/ArrayEnumerator::.ctor(System.Array)	mscorlib
 ArrayEnumerator_Clone_m49B98452916387FC9A99A632F1262FC2F62F49DC	System.Object System.Array/ArrayEnumerator::Clone()	mscorlib
 ArrayEnumerator_MoveNext_mB52D9F359A793488A8B74A78F5CF8C7EFE447746	System.Boolean System.Array/ArrayEnumerator::MoveNext()	mscorlib
@@ -4228,8 +4225,6 @@ Action_2__ctor_m6A0E7FE9DF9AE6C4BEE58611CB55F64FC3D79052_gshared	System.Void Sys
 Action_2_Invoke_m7BFCE0BBCF67689D263059B56A8D79161B698587_gshared	System.Void System.Action`2<System.Object,System.Object>::Invoke(T1,T2)	mscorlib
 Action_3__ctor_mFDF135E5454D50D572002F7C83EEB55B3CAA5211_gshared	System.Void System.Action`3<System.Object,System.Object,System.Object>::.ctor(System.Object,System.IntPtr)	mscorlib
 Action_3_Invoke_m399A0EB5E51EFD9B7D25DFE0EB7BF5EC0BE98346_gshared	System.Void System.Action`3<System.Object,System.Object,System.Object>::Invoke(T1,T2,T3)	mscorlib
-Action_3__ctor_mA1509E9324DF1AFB107FE5520FC1F249387BA2B3_gshared	System.Void System.Action`3<System.Single,System.Single,System.Single>::.ctor(System.Object,System.IntPtr)	mscorlib
-Action_3_Invoke_mE34104DFE939FEC6E1156DA4853B282678C28759_gshared	System.Void System.Action`3<System.Single,System.Single,System.Single>::Invoke(T1,T2,T3)	mscorlib
 ArrayPool_1__ctor_m15BEC958B6447E7265BC2EC4A9EEA326CACA859D_gshared	System.Void System.Buffers.ArrayPool`1<T>::.ctor()	mscorlib
 NULL	T[] System.Buffers.ArrayPool`1<T>::Rent(System.Int32)	mscorlib
 NULL	System.Void System.Buffers.ArrayPool`1<T>::Return(T[],System.Boolean)	mscorlib

@@ -16,8 +16,6 @@
 struct Action_1_t6F9EB113EB3F16226AEF811A2744F4111C116C87;
 // System.Action`2<System.Threading.Tasks.Task,System.Object>
 struct Action_2_tB3A2D09A16BB2D5A96CEEE66C2F9934F8AF9CEDB;
-// System.Action`3<System.Single,System.Single,System.Single>
-struct Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E;
 // System.Threading.AsyncLocal`1<System.Globalization.CultureInfo>
 struct AsyncLocal_1_t1D3339EA4C8650D2DEDDF9553E5C932B3DC2CCFD;
 // System.Comparison`1<Mono.Globalization.Unicode.Level2Map>
@@ -2724,8 +2722,6 @@ struct __Error_t858F8633B2BB18A0B92EB904D4CD8FAB9DF5F2CF  : public RuntimeObject
 // uWAVM.uWAVMBehavior
 struct uWAVMBehavior_tDE5A488AE99233312C6A5A35D6641E1C3FA9D4DA  : public RuntimeObject
 {
-	// System.Action`3<System.Single,System.Single,System.Single> uWAVM.uWAVMBehavior::onTransformRotationSet
-	Action_3_tF90A37B94256820313F23F3DF74A70B0A814E93E* ___onTransformRotationSet_0;
 };
 
 // System.Array/ArrayEnumerator
@@ -5129,9 +5125,9 @@ struct Timer_t763C1D5F5A36087DC92C7DA4D1F8AB578F83AB00  : public MarshalByRefObj
 struct TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C  : public uWAVMBehavior_tDE5A488AE99233312C6A5A35D6641E1C3FA9D4DA
 {
 	// System.Single uWAVMTests.TransformRotationTest::m_RotationSpeed
-	float ___m_RotationSpeed_1;
+	float ___m_RotationSpeed_0;
 	// System.Single uWAVMTests.TransformRotationTest::m_YRotation
-	float ___m_YRotation_2;
+	float ___m_YRotation_1;
 };
 
 // System.UInt16

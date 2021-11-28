@@ -6,16 +6,15 @@ namespace uWAVM
     [Serializable]
     public class uWAVMBehavior
     {
-        public event Action<float, float, float> onTransformRotationSet;
-#if UNITY_EDITOR
+#if UNITY_EDITOR && !FORCE_UWAVM
+        public event Action<float, float, float, int> onTransformRotationSet;
         public void SetRotation(float x, float y, float z)
         {
-            onTransformRotationSet?.Invoke(x, y, z);
+            onTransformRotationSet?.Invoke(x, y, z, 0);
         }
 #elif UNITY_WEBGL
         [DllImport("__Internal")]
-        public static extern int SetRotation(float x, float y, float z);
-        public void WEBGLFORSURE(){}
+        public static extern void SetRotation(float x, float y, float z);
 #endif
     }
 }
