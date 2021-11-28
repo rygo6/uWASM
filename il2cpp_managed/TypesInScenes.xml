@@ -1,4 +1,5 @@
 <linker>
 	<assembly fullname="System" preserve="nothing"/>
-	<assembly fullname="uWAVM" preserve="all"/>
+	<assembly fullname="uWAVMTests" preserve="all"/>
+	<assembly fullname="uWAVMBehaviour" preserve="all"/>
 </linker>

@@ -9,8 +9,8 @@ using uWAVM;
 public class uWAVMGameObjectEditor : Editor 
 {
     SerializedProperty m_BehaviourProperty;
-    Type[] m_Implementations;
-    int m_ImplementationTypeIndex = -1;
+    Type[] m_Behaviours;
+    int m_BehaviourTypeIndex = -1;
     
     void OnEnable()
     {
@@ -23,27 +23,27 @@ public class uWAVMGameObjectEditor : Editor
         
         serializedObject.Update();
         
-        m_Implementations = GetImplementations<uWAVMBehavior>().Where(impl=>!impl.IsSubclassOf(typeof(UnityEngine.Object))).ToArray();
+        m_Behaviours = GetImplementations<uWAVMBehavior>().Where(impl=>!impl.IsSubclassOf(typeof(UnityEngine.Object))).ToArray();
 
         if (m_BehaviourProperty.managedReferenceValue != null)
         {
-            for (int i = 0; i < m_Implementations.Length; ++i)
+            for (int i = 0; i < m_Behaviours.Length; ++i)
             {
-                if (m_BehaviourProperty.managedReferenceValue.GetType() == m_Implementations[i])
+                if (m_BehaviourProperty.managedReferenceValue.GetType() == m_Behaviours[i])
                 {
-                    m_ImplementationTypeIndex = i;
+                    m_BehaviourTypeIndex = i;
                     break;
                 }
             }
             EditorGUILayout.LabelField($"Loaded Implementation: {m_BehaviourProperty.managedReferenceValue.ToString()}");
         }
 
-        int newIndex = EditorGUILayout.Popup(new GUIContent("Select Implementation"), m_ImplementationTypeIndex, m_Implementations.Select(impl => impl.FullName).ToArray());
-        if (m_ImplementationTypeIndex != newIndex)
+        int newIndex = EditorGUILayout.Popup(new GUIContent("Select Behaviour"), m_BehaviourTypeIndex, m_Behaviours.Select(impl => impl.FullName).ToArray());
+        if (m_BehaviourTypeIndex != newIndex)
         {
-            m_ImplementationTypeIndex = newIndex;
-            Debug.Log($"Creating {m_Implementations[m_ImplementationTypeIndex]} and applying to {host}.");
-            host.m_Behaviour = (uWAVMBehavior) Activator.CreateInstance(m_Implementations[m_ImplementationTypeIndex]);
+            m_BehaviourTypeIndex = newIndex;
+            Debug.Log($"Creating {m_Behaviours[m_BehaviourTypeIndex]} and applying to {host}.");
+            host.m_Behaviour = (uWAVMBehavior) Activator.CreateInstance(m_Behaviours[m_BehaviourTypeIndex]);
         }
 
         serializedObject.ApplyModifiedProperties();
