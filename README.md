@@ -1,3 +1,10 @@
+Really don't try to use this for anything. Its my hacking project right now.
+
+This is an experimental project to compile Unity C# components to wasm then execute that wasm binary at runtime on a wasm VM in order to drive the component. Currently this is working in the most simple way possible. A cube is rotating via the wasmtime VM using C# component code that was compiled to wasm with il2cpp+emscripten by manually running commandline operations below.
+
+Depending, I will keep this going forward until the 'wasm component' workflow is basically indiscernible from typical C# component that would be executed through mono. Just tick a box on a C# component and it would then be compiled to wasm and run on a wasm vm, and its wasm binary would be packaged into the assetbundle for that prefab. Or get it as close to that as possible.
+
+
 First run a WebGL build to get all staging data in Temp folder.
 
 Run this command in powershell:
