@@ -40,6 +40,12 @@ namespace uWAVM
                 "uWAVMBehavior_SetRotation_m6D1BE4AD3EB53B8D4CE0A8BF783F44D2E0339530",
                 Function.FromCallback<float, float, float, int>(m_WasmStore, TransformRotationSet)
             );
+            
+            linker.Define(
+                "env",
+                "_Z42il2cpp_codegen_initialize_runtime_metadataPm",
+                Function.FromCallback<int>(m_WasmStore, il2cpp_codegen_initialize_runtime_metadata)
+            );
 
             var instance = linker.Instantiate(m_WasmStore, module);
             m_WasmUpdateMethod = instance.GetFunction(m_WasmStore, "TransformRotationTest_Update_mCD4245414D69ACEF0A6EC3E364E9A9C08C489F18");
@@ -49,6 +55,11 @@ namespace uWAVM
         void OnDestroy()
         {
             m_WasmStore?.Dispose();
+        }
+
+        void il2cpp_codegen_initialize_runtime_metadata(int p0)
+        {
+            Debug.Log("il2cpp_codegen_initialize_runtime_metadata " + p0);
         }
 
         void TransformRotationSet(float x, float y, float z, int method)
