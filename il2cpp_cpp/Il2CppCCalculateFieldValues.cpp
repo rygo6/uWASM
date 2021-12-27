@@ -4779,6 +4779,11 @@ struct __Error_t858F8633B2BB18A0B92EB904D4CD8FAB9DF5F2CF  : public RuntimeObject
 {
 };
 
+// uWAVMTests.uWAVMAPI
+struct uWAVMAPI_t852ACA3C966D51CA527982A5FE31678C8DFD63AA  : public RuntimeObject
+{
+};
+
 // uWAVM.uWAVMBehavior
 struct uWAVMBehavior_tDE5A488AE99233312C6A5A35D6641E1C3FA9D4DA  : public RuntimeObject
 {
@@ -23535,5 +23540,8 @@ IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable1480[1] =
 {
 };
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable1481[1] = 
+{
+};
+IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable1482[1] = 
 {
 };

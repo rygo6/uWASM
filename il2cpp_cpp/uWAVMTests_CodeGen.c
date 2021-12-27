@@ -20,25 +20,29 @@ extern void TransformRotationTest_Add_m91E818F16AE3F6DFA4DFFBC9946DEAEC450AFB91 
 extern void TransformRotationTest_Sub_m952B493E6D8DFBC21437F0EF0406441ED433CD54 (void);
 // 0x00000004 System.Void uWAVMTests.TransformRotationTest::.ctor()
 extern void TransformRotationTest__ctor_m1DB596213BBC59C50A65251842F03303E8F2B586 (void);
-static Il2CppMethodPointer s_methodPointers[4] = 
+// 0x00000005 uWAVMTests.TransformRotationTest uWAVMTests.uWAVMAPI::Instance()
+extern void uWAVMAPI_Instance_m81F3352714F1D0C4614A24377428024CC2B1A5C6 (void);
+static Il2CppMethodPointer s_methodPointers[5] = 
 {
 	TransformRotationTest_Update_mCD4245414D69ACEF0A6EC3E364E9A9C08C489F18,
 	TransformRotationTest_Add_m91E818F16AE3F6DFA4DFFBC9946DEAEC450AFB91,
 	TransformRotationTest_Sub_m952B493E6D8DFBC21437F0EF0406441ED433CD54,
 	TransformRotationTest__ctor_m1DB596213BBC59C50A65251842F03303E8F2B586,
+	uWAVMAPI_Instance_m81F3352714F1D0C4614A24377428024CC2B1A5C6,
 };
-static const int32_t s_InvokerIndices[4] = 
+static const int32_t s_InvokerIndices[5] = 
 {
 	922,
 	388,
 	388,
 	922,
+	1718,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_uWAVMTests_CodeGenModule;
 const Il2CppCodeGenModule g_uWAVMTests_CodeGenModule = 
 {
 	"uWAVMTests.dll",
-	4,
+	5,
 	s_methodPointers,
 	0,
 	NULL,

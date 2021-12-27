@@ -28,6 +28,7 @@ struct TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C;
 struct uWAVMBehavior_tDE5A488AE99233312C6A5A35D6641E1C3FA9D4DA;
 
 IL2CPP_EXTERN_C RuntimeClass* List_1_tF470A3BE5C1B5B68E1325EF3F109D172E60BD7CD_il2cpp_TypeInfo_var;
+IL2CPP_EXTERN_C RuntimeClass* TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C String_t* _stringLiteralD2EFCBBA102ED3339947E85F4141EB08926E40E9;
 IL2CPP_EXTERN_C const RuntimeMethod* List_1_Add_mF10DB1D3CBB0B14215F0E4F8AB4934A1955E5351_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* List_1__ctor_mCA8DD57EAC70C2B5923DBB9D5A77CEAC22E7068E_RuntimeMethod_var;
@@ -112,6 +113,11 @@ struct ValueType_t6D9B272BD21782F0A9A14F2E41F85A50E97A986F_marshaled_pinvoke
 };
 // Native definition for COM marshalling of System.ValueType
 struct ValueType_t6D9B272BD21782F0A9A14F2E41F85A50E97A986F_marshaled_com
+{
+};
+
+// uWAVMTests.uWAVMAPI
+struct uWAVMAPI_t852ACA3C966D51CA527982A5FE31678C8DFD63AA  : public RuntimeObject
 {
 };
 
@@ -215,6 +221,8 @@ inline void List_1__ctor_mCA8DD57EAC70C2B5923DBB9D5A77CEAC22E7068E (List_1_tF470
 }
 // System.Void uWAVM.uWAVMBehavior::.ctor()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void uWAVMBehavior__ctor_m45B10E80192E3C3F096C8776F6B02B1035589646 (uWAVMBehavior_tDE5A488AE99233312C6A5A35D6641E1C3FA9D4DA* __this, const RuntimeMethod* method) ;
+// System.Void uWAVMTests.TransformRotationTest::.ctor()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TransformRotationTest__ctor_m1DB596213BBC59C50A65251842F03303E8F2B586 (TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C* __this, const RuntimeMethod* method) ;
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
@@ -292,6 +300,31 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TransformRotationTest__ctor_m1DB596213BB
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___m_StringList_1), (void*)L_0);
 		uWAVMBehavior__ctor_m45B10E80192E3C3F096C8776F6B02B1035589646(__this, NULL);
 		return;
+	}
+}
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+// uWAVMTests.TransformRotationTest uWAVMTests.uWAVMAPI::Instance()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C* uWAVMAPI_Instance_m81F3352714F1D0C4614A24377428024CC2B1A5C6 (const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		// var instance = new TransformRotationTest();
+		TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C* L_0 = (TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C*)il2cpp_codegen_object_new(TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C_il2cpp_TypeInfo_var);
+		TransformRotationTest__ctor_m1DB596213BBC59C50A65251842F03303E8F2B586(L_0, NULL);
+		// return instance;
+		return L_0;
 	}
 }
 #ifdef __clang__

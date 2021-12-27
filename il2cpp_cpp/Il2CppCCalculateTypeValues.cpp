@@ -4779,6 +4779,11 @@ struct __Error_t858F8633B2BB18A0B92EB904D4CD8FAB9DF5F2CF  : public RuntimeObject
 {
 };
 
+// uWAVMTests.uWAVMAPI
+struct uWAVMAPI_t852ACA3C966D51CA527982A5FE31678C8DFD63AA  : public RuntimeObject
+{
+};
+
 // uWAVM.uWAVMBehavior
 struct uWAVMBehavior_tDE5A488AE99233312C6A5A35D6641E1C3FA9D4DA  : public RuntimeObject
 {
@@ -22046,15 +22051,17 @@ const Il2CppTypeDefinitionSizes g_typeDefinitionSize1475 = { sizeof (U3CModuleU3
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1476;
 const Il2CppTypeDefinitionSizes g_typeDefinitionSize1476 = { sizeof (TransformRotationTest_tB8AE72C2E135E433A5CFD3251AAD11050DA8893C), -1, 0, 0 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1477;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize1477 = { sizeof (U3CModuleU3E_t462EE7C2AEE4BBF1F078840DF38500A9CA0030FD), -1, 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize1477 = { sizeof (uWAVMAPI_t852ACA3C966D51CA527982A5FE31678C8DFD63AA), -1, 0, 0 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1478;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize1478 = { sizeof (uWAVMBehavior_tDE5A488AE99233312C6A5A35D6641E1C3FA9D4DA), -1, 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize1478 = { sizeof (U3CModuleU3E_t462EE7C2AEE4BBF1F078840DF38500A9CA0030FD), -1, 0, 0 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1479;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize1479 = { 0, sizeof(Il2CppIActivationFactory*), 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize1479 = { sizeof (uWAVMBehavior_tDE5A488AE99233312C6A5A35D6641E1C3FA9D4DA), -1, 0, 0 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1480;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize1480 = { sizeof (Il2CppComObject), -1, 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize1480 = { 0, sizeof(Il2CppIActivationFactory*), 0, 0 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1481;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize1481 = { sizeof (__Il2CppComDelegate_tD0DD2BBA6AC8F151D32B6DFD02F6BDA339F8DC4D), -1, 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize1481 = { sizeof (Il2CppComObject), -1, 0, 0 };
+extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1482;
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize1482 = { sizeof (__Il2CppComDelegate_tD0DD2BBA6AC8F151D32B6DFD02F6BDA339F8DC4D), -1, 0, 0 };
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
