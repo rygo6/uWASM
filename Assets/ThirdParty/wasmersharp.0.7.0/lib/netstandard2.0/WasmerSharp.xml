@@ -1,0 +1,703 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WasmerSharp</name>
+    </assembly>
+    <members>
+        <member name="T:WasmerSharp.ImportExportKind">
+            <summary>
+            Describes the kind of export or import
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.ImportExportKind.Function">
+            <summary>
+            The import or export is a Function
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.ImportExportKind.Global">
+            <summary>
+            The import or export is a global
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.ImportExportKind.Memory">
+            <summary>
+             The import or export is a memory object
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.ImportExportKind.Table">
+            <summary>
+            The import or export is a table
+            </summary>
+        </member>
+        <member name="T:WasmerSharp.WasmerValueType">
+            <summary>
+            Describes the types exposed by the WasmerBridge
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.WasmerValueType.Int32">
+            <summary>
+            The type is 32-bit integer
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.WasmerValueType.Int64">
+            <summary>
+            The type is a 64 bit integer
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.WasmerValueType.Float32">
+            <summary>
+            The type is a 32-bit floating point
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.WasmerValueType.Float64">
+            <summary>
+            The type is a 64-bit floating point
+            </summary>
+        </member>
+        <member name="T:WasmerSharp.WasmerValue">
+            <summary>
+            This object can wrap an int, long, float or double.   The Tag property describes the actual payload, and the I32, I64, F32 and F64 fields provide access to the underlying data.   Implicit conversion from those data types to WasmerValue exist, and explicit conversions from a WasmerValue to those types exist.
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.WasmerValue.Tag">
+            <summary>
+            The underlying type for the value stored here.
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.WasmerValue.Storage">
+            <summary>
+            The underlying value for the value stored here.
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.WasmerValue.Int32">
+            <summary>
+            The 32-bit integer component, when the Tag is Int32
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.WasmerValue.Int64">
+            <summary>
+            The 64-bit integer component, when the Tag is Int64
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.WasmerValue.Float32">
+            <summary>
+            The 32-bit floating point component, when the Tag is Float32
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.WasmerValue.Float64">
+            <summary>
+            The 64-bit floating point component, when the Tag is Float64
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.Encode">
+            <summary>
+            Returns a boxed object that contains the underlying .NET type (int, long, float, double) based on the Tag for this value.
+            </summary>
+            <returns>The boxed value.</returns>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.ToString">
+            <summary>
+             Returns the value, suitable to be printed, the type is not shown.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.op_Explicit(WasmerSharp.WasmerValue)~System.Int32">
+            <summary>
+            Returns the stored value as an int.   This will cast if the value is not a native int.
+            </summary>
+            <param name="val">The incoming WasmerValue.</param>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.op_Explicit(WasmerSharp.WasmerValue)~System.Int64">
+            <summary>
+            Returns the stored value as a long.   This will cast if the value is not a native long.
+            </summary>
+            <param name="val">The incoming WasmerValue.</param>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.op_Explicit(WasmerSharp.WasmerValue)~System.Single">
+            <summary>
+            Returns the stored value as a float.   This will cast if the value is not a native float.
+            </summary>
+            <param name="val">The incoming WasmerValue.</param>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.op_Explicit(WasmerSharp.WasmerValue)~System.Double">
+            <summary>
+            Returns the stored value as a double.   This will cast if the value is not a native double.
+            </summary>
+            <param name="val">The incoming WasmerValue.</param>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.op_Implicit(System.Int32)~WasmerSharp.WasmerValue">
+            <summary>
+            Creates a WasmerValue from an integer
+            </summary>
+            <param name="val">Integer value to wrap</param>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.op_Implicit(System.Int64)~WasmerSharp.WasmerValue">
+            <summary>
+            Creates a WasmerValue from an long
+            </summary>
+            <param name="val">Long value to wrap</param>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.op_Implicit(System.Single)~WasmerSharp.WasmerValue">
+            <summary>
+            Creates a WasmerValue from an float
+            </summary>
+            <param name="val">Float value to wrap</param>
+        </member>
+        <member name="M:WasmerSharp.WasmerValue.op_Implicit(System.Double)~WasmerSharp.WasmerValue">
+            <summary>
+            Creates a WasmerValue from an double
+            </summary>
+            <param name="val">Double value to wrap</param>
+        </member>
+        <member name="T:WasmerSharp.WasmerNativeHandle">
+            <summary>
+            This wraps a native handle and takes care of disposing the handles they wrap.
+            Due to the design of the Wasmer API that can
+            </summary>
+            <remarks>
+            produce a lot of values that need to be destroyed, and in an effort to balance
+            the complexity that it would involve, this queues releases of data on either
+            construction or on the main thread dispose method.
+            </remarks>
+        </member>
+        <member name="M:WasmerSharp.WasmerNativeHandle.Flush">
+            <summary>
+             Releases any pending objects that were queued for destruction
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.WasmerNativeHandle.Dispose">
+            <summary>
+             Disposes the object, releasing the unmanaged resources associated with it.
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.WasmerNativeHandle.GetHandleDisposer">
+            <summary>
+            This method when called with disposing, should dispose right away,
+            otherwise it should return an Action of IntPtr that can dispose the handle.
+            </summary>
+            <returns>The method to invoke on disposing, or null if there is no need to dispose</returns>
+        </member>
+        <member name="P:WasmerSharp.WasmerNativeHandle.LastError">
+            <summary>
+            Returns the last error message that was raised by the Wasmer Runtime
+            </summary>
+        </member>
+        <member name="T:WasmerSharp.Module">
+            <summary>
+            Represents a WebAssembly module, created from a byte array containing the WebAssembly code.
+            </summary>
+            <remarks>
+               Use the Create method to create new instances of a module.
+            </remarks>
+        </member>
+        <member name="M:WasmerSharp.Module.Create(System.IntPtr,System.UInt32)">
+            <summary>
+            Creates a new Module from the given WASM bytes pointed to by the specified address
+            </summary>
+            <param name="wasmBody">A pointer to a block of memory containing the WASM code to load into the module</param>
+            <param name="bodyLength">The size of the wasmBody pointer</param>
+            <returns>The WasmerModule instance, or null on error.   You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="M:WasmerSharp.Module.Create(System.Byte[])">
+            <summary>
+            Creates a new Module from the given WASM bytes
+            </summary>
+            <param name="wasmBody">An array containing the WASM code to load into the module</param>
+            <returns>The WasmerModule instance, or null on error.  You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="P:WasmerSharp.Module.ExportDescriptors">
+            <summary>
+            Gets export descriptors for the given module
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.Module.Instatiate(WasmerSharp.Import[])">
+            <summary>
+            Creates a new Instance from the given wasm bytes and imports. 
+            </summary>
+            <param name="imports">The list of imports to pass, usually Function, Global and Memory</param>
+            <returns>A Wasmer.Instance on success, or null on error.   You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="P:WasmerSharp.Module.ImportDescriptors">
+            <summary>
+            Returns the Import Descriptors for this module
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.Module.Serialize">
+            <summary>
+            Serializes the module, the result can be turned into a byte array and saved.
+            </summary>
+            <returns>Null on error, or an instance of SerializedModule on success.  You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="M:WasmerSharp.Module.Validate(System.IntPtr,System.UInt32)">
+            <summary>
+            Validates a block of bytes for being a valid web assembly package.
+            </summary>
+            <param name="bytes">Pointer to the bytes that contain the webassembly payload</param>
+            <param name="len">Length of the buffer.</param>
+            <returns>True if this contains a valid webassembly package, false otherwise.</returns>
+        </member>
+        <member name="M:WasmerSharp.Module.Validate(System.Byte[])">
+            <summary>
+            Validates a byte array for being a valid web assembly package.
+            </summary>
+            <param name="buffer">Array containing the webassembly package to validate</param>
+            <returns>True if this contains a valid webassembly package, false otherwise.</returns>
+        </member>
+        <member name="T:WasmerSharp.ExportDescriptor">
+            <summary>
+            Represents an export from a web assembly module
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.ExportDescriptor.Kind">
+            <summary>
+             Gets export descriptor kind
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.ExportDescriptor.Name">
+            <summary>
+            Gets name for the export descriptor
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.ExportDescriptor.ToString">
+            <summary>
+             Returns a human-readable description of the export
+            </summary>
+        </member>
+        <member name="T:WasmerSharp.ExportFunction">
+            <summary>
+            Represents an ExportedFunction from WebAssembly to .NET
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.ExportFunction.Call(WasmerSharp.WasmerValue[],WasmerSharp.WasmerValue[])">
+            <summary>
+            Calls the function with the specified parameters
+            </summary>
+            <param name="values">The values to pass to the exported function.</param>
+            <param name="results">The array with the results, it should have enough space to hold all the results</param>
+            <returns></returns>
+        </member>
+        <member name="P:WasmerSharp.ExportFunction.Parameters">
+            <summary>
+            Returns the parameter types for the exported function as an array.   Returns null on error. You can use the LastError error property to get details on the error.
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.ExportFunction.Returns">
+            <summary>
+            Returns the return types for the exported function as an array.   Returns null on error. You can use the LastError error property to get details on the error.
+            </summary>
+        </member>
+        <member name="T:WasmerSharp.Export">
+            <summary>
+            Represents an exported object from a Wasm Instance
+            </summary>
+            <remarks>
+            <para>
+              A module can declare a sequence of exports which are returned at
+              instantiation time to the host environment.
+            </para>
+            <para>
+               Exports have a name, which is required to be valid UTF-8, whose meaning is defined by the host environment, a type, indicating whether the export is a function, global, memory or table.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:WasmerSharp.Export.Kind">
+            <summary>
+            Gets the kind for the exported item
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.Export.Name">
+            <summary>
+            Gets the name for the export
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.Export.GetExportFunction">
+            <summary>
+            Gets the exported function
+            </summary>
+            <returns>Null on error, or the exported function.  You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="M:WasmerSharp.Export.GetMemory">
+            <summary>
+            Returns the memory object from the export
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:WasmerSharp.Memory">
+            <summary>
+            Represents the WebAssembly memory.   Memory is allocated in pages, which are 64k bytes in size.
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.Memory.Create(System.UInt32,System.Nullable{System.UInt32})">
+            <summary>
+             Creates a memory block with the specified minimum and maxiumum limits
+            </summary>
+            <param name="minPages">Minimum number of allowed pages</param>
+            <param name="maxPages">Optional, Maximum number of allowed pages</param>
+            <returns>The object on success, or null on failure. You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="M:WasmerSharp.Memory.#ctor(System.UInt32,System.Nullable{System.UInt32})">
+            <summary>
+             Constructor for memory, throws if there is an error.
+            </summary>
+            <param name="minPages">Minimum number of allowed pages</param>
+            <param name="maxPages">Optional, Maximum number of allowed pages</param>
+        </member>
+        <member name="M:WasmerSharp.Memory.Grow(System.UInt32)">
+            <summary>
+            Grows the memory by the specified amount of pages.
+            </summary>
+            <param name="deltaPages">The number of additional pages to grow</param>
+            <returns>true on success, false on error.   You can use the LastError property to get more details on the error.</returns>
+        </member>
+        <member name="P:WasmerSharp.Memory.PageLength">
+            <summary>
+            Returns the current length in pages of the given memory 
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.Memory.DataLength">
+            <summary>
+            Returns the current length in bytes of the given memory 
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.Memory.Data">
+            <summary>
+            Returns a pointer to the memory backing this Memory instance.
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.Memory.ToString">
+            <summary>
+             Returns a human-readable description of the Memory resource
+            </summary>
+        </member>
+        <member name="T:WasmerSharp.Global">
+            <summary>
+            Represents a Global variable instance, importable/exportable across multiple modules.
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.Global.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            Creates a new integer global with the specified WasmerValue.
+            </summary>
+            <param name="val">The value to place on the global</param>
+            <param name="mutable">Determines whether the global is mutable</param>
+        </member>
+        <member name="M:WasmerSharp.Global.#ctor(System.Int64,System.Boolean)">
+            <summary>
+            Creates a new long global with the specified WasmerValue.
+            </summary>
+            <param name="val">The value to place on the global</param>
+            <param name="mutable">Determines whether the global is mutable</param>
+        </member>
+        <member name="M:WasmerSharp.Global.#ctor(System.Single,System.Boolean)">
+            <summary>
+            Creates a new float global with the specified WasmerValue.
+            </summary>
+            <param name="val">The value to place on the global</param>
+            <param name="mutable">Determines whether the global is mutable</param>
+        </member>
+        <member name="M:WasmerSharp.Global.#ctor(System.Double,System.Boolean)">
+            <summary>
+            Creates a new double global with the specified WasmerValue.
+            </summary>
+            <param name="val">The value to place on the global</param>
+            <param name="mutable">Determines whether the global is mutable</param>
+        </member>
+        <member name="P:WasmerSharp.Global.Value">
+            <summary>
+            Returns the value stored in this global
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.Global.IsMutable">
+            <summary>
+            Determines whether this Global is mutable or not.
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.Global.ValueType">
+            <summary>
+            Returns the ValueType (type) of the global.
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.Global.Set(WasmerSharp.WasmerValue)">
+            <summary>
+            Sets the value of the global to the provided value, which can be a WasmerValue, or an int, long, float or double
+            </summary>
+            <param name="value">The new value to set</param>
+        </member>
+        <member name="T:WasmerSharp.ImportDescriptor">
+            <summary>
+            The import descriptors for a WebAssembly module describe the type of each import, iits name and the module name it belongs to.
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.ImportDescriptor.Kind">
+            <summary>
+            Returns the descriptor kind
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.ImportDescriptor.ModuleName">
+            <summary>
+            Gets module name for the import descriptor
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.ImportDescriptor.Name">
+            <summary>
+            Gets name for the import descriptor
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.ImportDescriptor.ToString">
+            <summary>
+             Returns a human-readable description of the import
+            </summary>
+        </member>
+        <member name="T:WasmerSharp.ImportFunction">
+            <summary>
+             Support for surfacing .NET functions to the Wasm module.
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.ImportFunction.#ctor(System.Delegate)">
+            <summary>
+               Creates an ImportFunction from a delegate method, the .NET method passed on the delegate will then be available to  be called by the Wasm runtime.
+            </summary>
+            <param name="method">The method to wrap.   The method can only contains int, long, float or double arguments.  The method return can include void, int, long, float and double. </param>
+        </member>
+        <member name="T:WasmerSharp.Instance">
+            <summary>
+            Instances represents all the state associated with a module.   These are created by calling Module.Instantiate or by calling the Instance constructor.
+            </summary>
+            <remarks>
+            At runtime, a module can be instantiated with a set of import values to produce an instance, which is an
+            immutable tuple referencing all the state accessible to the running module. Multiple module instances
+            can access the same shared state which is the basis for dynamic linking in WebAssembly.
+            </remarks>
+        </member>
+        <member name="M:WasmerSharp.Instance.#ctor(System.Byte[],WasmerSharp.Import[])">
+            <summary>
+            Creates a new Instance from the given wasm bytes and imports. 
+            </summary>
+            <param name="wasm">Wasm byte code</param>
+            <param name="imports">The list of imports to pass, usually Function, Global and Memory</param>
+            <returns>A Wasmer.Instance on success, or null on error.   You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="M:WasmerSharp.Instance.Call(System.String,WasmerSharp.WasmerValue[],WasmerSharp.WasmerValue[])">
+            <summary>
+            Calls the specified function with the provided arguments
+            </summary>
+            <param name="functionName">Namer of the exported function to call in the instane</param>
+            <param name="parameters">The parameters to pass to the function</param>
+            <param name="results">The array where the return values are returned</param>
+            <returns>True on success, false on failure</returns>
+        </member>
+        <member name="M:WasmerSharp.Instance.Call(System.String,System.Object[])">
+            <summary>
+            Calls the specified function with the provided arguments
+            </summary>
+            <param name="functionName">Namer of the exported function to call in the instane</param>
+            <param name="args">The argument types are limited to int, long, float and double.</param>
+            <returns>An array of values on success, null on error. You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="P:WasmerSharp.Instance.Exports">
+            <summary>
+            Returns an array with all the exports - the individual values must be manually disposed.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WasmerSharp.Instance.SetData(System.Object)">
+            <summary>
+            Sets a global data field that can be accessed by all imported functions and retrieved by the InstanceContext.Data property.
+            </summary>
+            <param name="value">The value to pass to all the InstanceContext members</param>
+        </member>
+        <member name="P:WasmerSharp.Instance.Context">
+            <summary>
+            Extracts the instance's context and returns it.
+            </summary>
+        </member>
+        <member name="T:WasmerSharp.Table">
+            <summary>
+            Represents a Wasmer Table.   Use the Create static method to create new instances of the table.
+            </summary>
+            <remarks>
+            <para>
+            A table is similar to a linear memory whose elements, instead of being bytes, are opaque values of a
+            particular table element type. This allows the table to contain values—like GC references,
+            raw OS handles, or native pointers—that are accessed by WebAssembly code indirectly through an integer index.
+            This feature bridges the gap between low-level, untrusted linear memory and high-level opaque
+            handles/references at the cost of a bounds-checked table indirection.
+            </para>
+            <para>
+            The table’s element type constrains the type of elements stored in the table and allows engines to
+            avoid some type checks on table use. When a WebAssembly value is stored in a table, the value’s
+            type must precisely match the element type. Depending on the operator/API used to store the value,
+            this check may be static or dynamic. Just like linear memory, updates to a table are observed
+            immediately by all instances that reference the table. Host environments may also allow storing
+            non-WebAssembly values in tables in which case, as with imports, the meaning of using the value
+            is defined by the host environment.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:WasmerSharp.Table.Create(System.UInt32,System.Nullable{System.UInt32})">
+            <summary>
+            Creates a new Table for the given descriptor
+            </summary>
+            <param name="min">Minimum number of elements to store on the table.</param>
+            <param name="max">Optional, maximum number of elements to store on the table.</param>
+            <returns>An instance of Table on success, or null on error.  You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="M:WasmerSharp.Table.Grow(System.UInt32)">
+            <summary>
+            Attemps to grow the table by the specified number of elements.
+            </summary>
+            <param name="delta">Number of elements to add to the table.</param>
+            <returns>true on success, false on failure.  You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="P:WasmerSharp.Table.Length">
+            <summary>
+            Returns the current length of the given Table  
+            </summary>
+        </member>
+        <member name="T:WasmerSharp.Import">
+            <summary>
+            Use this class to create the various Import objects (Globals, Memory, Function and Tables)
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.Import.ModuleName">
+            <summary>
+            The module name for this import
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.Import.ImportName">
+            <summary>
+             The name for this import
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.Import.Kind">
+            <summary>
+            The kind of import
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.Import.FunctionsFromType``1(System.String)">
+            <summary>
+            Returns an array of Import elements based on the suitable functions in the type T as Imports.
+            </summary>
+            <typeparam name="T">The type that will be scanned for methods.</typeparam>
+            <param name="moduleName">The module name used by default.</param>
+            <remarks>
+            You can use this method to easily expose a number of methods in a type to the 
+            </remarks>
+            <returns>Array of imports with ImportFunctions as defined on the type</returns>
+        </member>
+        <member name="M:WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.Memory)">
+            <summary>
+            Creates a Memory import.
+            </summary>
+            <param name="moduleName">The module name for this import</param>
+            <param name="importName">The name for this import, if not specified, it will default to "memory"</param>
+            <param name="memory">The memory object to import</param>
+        </member>
+        <member name="M:WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.Global)">
+            <summary>
+            Creates a Global import.
+            </summary>
+            <param name="moduleName">The module name for this import</param>
+            <param name="importName">The name for this import.</param>
+            <param name="global">The global object to import</param>
+        </member>
+        <member name="M:WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.ImportFunction)">
+            <summary>
+            Creates a Function import.
+            </summary>
+            <param name="moduleName">The module name for this import</param>
+            <param name="importName">The name for this import</param>
+            <param name="function">The function to import</param>
+        </member>
+        <member name="M:WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.Table)">
+            <summary>
+            Creates a Table import.
+            </summary>
+            <param name="moduleName">The module name for this import</param>
+            <param name="importName">The name for this import</param>
+            <param name="table">The table to import</param>
+        </member>
+        <member name="T:WasmerSharp.SerializedModule">
+            <summary>
+            Modules can either be serialized to byte arrays, or created from a serialized state (byte arrays).  This class provides this bridge.
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.SerializedModule.FromBytes(System.IntPtr,System.UInt32)">
+            <summary>
+            Creates a new SerializedModule from the provided buffer.
+            </summary>
+            <param name="bytes">Pointer to a region in memory containing the serialized module.</param>
+            <param name="len">The number of bytes toe process from the buffer</param>
+            <returns>Returns null on error, or an instance of SerializeModule on success.  You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="M:WasmerSharp.SerializedModule.FromBytes(System.Byte[])">
+            <summary>
+            Creates a new SerializedModule from the provided byte array
+            </summary>
+            <param name="buffer">Array of bytes containing the serialized module.</param>
+            <returns>Returns null on error, or an instance of SerializeModule on success.   You can use the LastError error property to get details on the error.</returns>
+        </member>
+        <member name="M:WasmerSharp.SerializedModule.GetModuleBytes">
+            <summary>
+            Returns the serialized module as a byte array.
+            </summary>
+            <returns>The byte array for this serialized module</returns>
+        </member>
+        <member name="M:WasmerSharp.SerializedModule.Deserialize">
+            <summary>
+            Deserialize the given serialized module.
+            </summary>
+            <returns>Returns an instance of a Module, or null on error.  You can use the LastError error property to get details on the error. </returns>
+        </member>
+        <member name="T:WasmerSharp.InstanceContext">
+            <summary>
+            An instance of this type is provided as the first parameter of imported functions and can be used
+            to get some contextual information from the callback to operate on: the global Data set for the
+            instance as well as the associated memory.
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.InstanceContext.Handle">
+            <summary>
+              Handle to the underlying wasmer_instance_context_t *
+            </summary>
+        </member>
+        <member name="P:WasmerSharp.InstanceContext.Data">
+            <summary>
+            Retrieves the global Data value that was set for this Instance.
+            </summary>
+        </member>
+        <member name="M:WasmerSharp.InstanceContext.GetMemory(System.UInt32)">
+            <summary>
+            The memory blob associated with the instance.   Currently this only supports idx=0
+            </summary>
+            <param name="idx">The index of the memory to retrieve, currently only supports one memory blob.</param>
+        </member>
+        <member name="T:WasmerSharp.WasmerImportAttribute">
+            <summary>
+            This attribute can be applied to a member that takes an IntanceContext as a first parameter
+            and zero or more parameters of type int, long, float or double to register the module name
+            and name.   The resulting method is returned as an Imports that is suitable to be passed
+            to the Instantiate methods.
+            </summary>
+        </member>
+        <member name="F:WasmerSharp.WasmerImportAttribute.Module">
+            <summary>The desired module name to apply to this method.</summary>
+        </member>
+        <member name="F:WasmerSharp.WasmerImportAttribute.Name">
+            <summary>The desired name to surface the method as.</summary>
+        </member>
+        <member name="M:WasmerSharp.WasmerImportAttribute.#ctor(System.String)">
+            <summary>
+            Sets the import name, and inherits the module name
+            </summary>
+            <param name="name">Name to give this import</param>
+        </member>
+        <member name="M:WasmerSharp.WasmerImportAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Sets the import name and module name.
+            </summary>
+            <param name="module">Name for the module.</param>
+            <param name="name">Name to give this import</param>
+        </member>
+    </members>
+</doc>

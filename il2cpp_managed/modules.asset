@@ -1,0 +1,455 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!877146078 &1
+PlatformModuleSetup:
+  m_ObjectHideFlags: 0
+  modules:
+  - name: SharedInternals
+    dependencies: []
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Core
+    dependencies:
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Accessibility
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: AI
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: AndroidJNI
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: Animation
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: HotReload
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: AssetBundle
+    dependencies:
+      - Core
+      - SharedInternals
+      - HotReload
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: Audio
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: Physics
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: Cloth
+    dependencies:
+      - Core
+      - SharedInternals
+      - Physics
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UnityConnect
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: TLS
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: UnityWebRequest
+    dependencies:
+      - Core
+      - SharedInternals
+      - TLS
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: JSONSerialize
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UnityAnalytics
+    dependencies:
+      - Core
+      - SharedInternals
+      - UnityConnect
+      - UnityWebRequest
+      - JSONSerialize
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: CrashReporting
+    dependencies:
+      - Core
+      - SharedInternals
+      - UnityConnect
+      - UnityAnalytics
+      - UnityWebRequest
+      - JSONSerialize
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Director
+    dependencies:
+      - Core
+      - SharedInternals
+      - Audio
+      - Animation
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: DSPGraph
+    dependencies:
+      - Core
+      - SharedInternals
+      - Audio
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: ImageConversion
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: GameCenter
+    dependencies:
+      - Core
+      - SharedInternals
+      - ImageConversion
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: GI
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Grid
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: TextRendering
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: InputLegacy
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: IMGUI
+    dependencies:
+      - Core
+      - SharedInternals
+      - TextRendering
+      - InputLegacy
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: Input
+    dependencies:
+      - Core
+      - SharedInternals
+      - JSONSerialize
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Localization
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: ParticleSystem
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: PerformanceReporting
+    dependencies:
+      - Core
+      - SharedInternals
+      - UnityConnect
+      - UnityAnalytics
+      - JSONSerialize
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Physics2D
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: Profiler
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: RuntimeInitializeOnLoadManagerInitializer
+    dependencies:
+      - Core
+      - SharedInternals
+      - JSONSerialize
+    strippable: 0
+    controlledByBuiltinPackage: 0
+  - name: ScreenCapture
+    dependencies:
+      - Core
+      - SharedInternals
+      - ImageConversion
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: SpriteMask
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: SpriteShape
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Streaming
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Substance
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Subsystems
+    dependencies:
+      - Core
+      - SharedInternals
+      - JSONSerialize
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: Terrain
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: TerrainPhysics
+    dependencies:
+      - Core
+      - SharedInternals
+      - Physics
+      - Terrain
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: TextCoreFontEngine
+    dependencies:
+      - Core
+      - SharedInternals
+      - TextRendering
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: TextCoreTextEngine
+    dependencies:
+      - Core
+      - SharedInternals
+      - TextRendering
+      - TextCoreFontEngine
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Tilemap
+    dependencies:
+      - Core
+      - SharedInternals
+      - Grid
+      - Physics2D
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UaaLAnalytics
+    dependencies:
+      - Core
+      - SharedInternals
+      - JSONSerialize
+      - UnityAnalytics
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UI
+    dependencies:
+      - Core
+      - SharedInternals
+      - TextRendering
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UIElementsNative
+    dependencies:
+      - Core
+      - SharedInternals
+      - UI
+      - IMGUI
+      - TextRendering
+      - TextCoreTextEngine
+      - JSONSerialize
+      - InputLegacy
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UIElements
+    dependencies:
+      - Core
+      - SharedInternals
+      - UI
+      - IMGUI
+      - TextRendering
+      - TextCoreFontEngine
+      - TextCoreTextEngine
+      - JSONSerialize
+      - InputLegacy
+      - UIElementsNative
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: Umbra
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UNET
+    dependencies:
+      - Core
+      - SharedInternals
+      - JSONSerialize
+      - UnityWebRequest
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: UnityCurl
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: UnityTestProtocol
+    dependencies:
+      - Core
+      - SharedInternals
+      - JSONSerialize
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: UnityWebRequestAssetBundle
+    dependencies:
+      - Core
+      - SharedInternals
+      - AssetBundle
+      - UnityWebRequest
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UnityWebRequestAudio
+    dependencies:
+      - Core
+      - SharedInternals
+      - UnityWebRequest
+      - Audio
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UnityWebRequestTexture
+    dependencies:
+      - Core
+      - SharedInternals
+      - UnityWebRequest
+      - ImageConversion
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: UnityWebRequestWWW
+    dependencies:
+      - Core
+      - SharedInternals
+      - UnityWebRequest
+      - UnityWebRequestAssetBundle
+      - UnityWebRequestAudio
+      - Audio
+      - AssetBundle
+      - ImageConversion
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: Vehicles
+    dependencies:
+      - Core
+      - SharedInternals
+      - Physics
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: VFX
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 0
+  - name: Video
+    dependencies:
+      - Core
+      - SharedInternals
+      - Audio
+      - UI
+      - UnityWebRequest
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: XR
+    dependencies:
+      - Core
+      - SharedInternals
+      - Physics
+      - JSONSerialize
+      - Input
+      - Subsystems
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: VR
+    dependencies:
+      - Core
+      - SharedInternals
+      - Input
+      - JSONSerialize
+      - Physics
+      - XR
+    strippable: 1
+    controlledByBuiltinPackage: 1
+  - name: WebGL
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 0
+    controlledByBuiltinPackage: 0
+  - name: Wind
+    dependencies:
+      - Core
+      - SharedInternals
+    strippable: 1
+    controlledByBuiltinPackage: 1

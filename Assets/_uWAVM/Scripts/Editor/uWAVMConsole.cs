@@ -1,15 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public static class uWAVMConsole
 {
     static bool IsAssemblyOrTest(string file)
     {
-        return file.Contains(".c") || file.Contains(".cpp") || file.Contains("test");
+        return file.Contains(".c") || file.Contains(".cpp");
+    }
+    
+    static bool IsAssembly(string file)
+    {
+        return file.Contains("test");
+    }
+
+    [MenuItem("uWAVM/GeneratEMCCCommand")]
+    public static void GetALLCPPFromDag()
+    {
+        
+        
     }
 
     [MenuItem("uWAVM/GeneratEMCCCommand")]
@@ -25,50 +42,53 @@ public static class uWAVMConsole
             sb.Append($"\"{formatted}\" ");
         }
         
-        foreach (string file in Directory.GetFiles("C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp", "*.c*", SearchOption.AllDirectories))
-        {
-            if (!IsAssemblyOrTest(file)) continue;
-            string formatted = file.Replace('\\', '/');
-            sb.Append($"\"{formatted}\" ");
-        }
-        
-        foreach (string file in Directory.GetFiles("C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/bdwgc", "*.c*", SearchOption.AllDirectories))
-        {
-            if (!IsAssemblyOrTest(file)) continue;
-            if (file.Contains("gc.c") || 
-                file.Contains("al_handler.c") || 
-                file.Contains("vector_mlc.c") || 
-                file.Contains("gcj_mlc.c"))
-            {
-                string formatted = file.Replace('\\', '/');
-                sb.Append($"\"{formatted}\" ");
-            }
-        }
+        // foreach (string file in Directory.GetFiles("C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp", "*.c*", SearchOption.AllDirectories))
+        // {
+        //     if (!IsAssemblyOrTest(file)) continue;
+        //     string formatted = file.Replace('\\', '/');
+        //     sb.Append($"\"{formatted}\" ");
+        // }
+        //
+        // foreach (string file in Directory.GetFiles("C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/bdwgc", "*.c*", SearchOption.AllDirectories))
+        // {
+        //     if (!IsAssemblyOrTest(file)) continue;
+        //     if (file.Contains("gc.c") || 
+        //         file.Contains("al_handler.c") || 
+        //         file.Contains("vector_mlc.c") || 
+        //         file.Contains("gcj_mlc.c"))
+        //     {
+        //         string formatted = file.Replace('\\', '/');
+        //         sb.Append($"\"{formatted}\" ");
+        //     }
+        // }
 
-        // sb.Append("-pipe");
-        // sb.Append(" -UGC_THREADS");
-        // sb.Append(" -UUSE_MMAP");
-        // sb.Append(" -UUSE_MUNMAP");
-        // sb.Append(" -Xclang");
-        // sb.Append(" -Wno-c++11-extensions");
-        // sb.Append(" -Wno-nonportable-include-path");
-        // sb.Append(" -ffunction-sections");
-        // sb.Append(" -fdata-sections");
-        // sb.Append(" -fmessage-length=0");
+        
+
+        sb.Append(" \"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/Variations/development/baselib.bc\"");
+        
         sb.Append(" -DBASELIB_INLINE_NAMESPACE=il2cpp_baselib");
-        // sb.Append(" -DIL2CPP_MONO_DEBUGGER_DISABLED");
-        // sb.Append(" -DRUNTIME_IL2CPP");
-        // sb.Append(" -DGC_NOT_DLL");
-        // sb.Append(" -DIL2CPP_DEFAULT_DATA_DIR_PATH=Data");
-        // sb.Append(" -DNDEBUG");
-        sb.Append(" \"--sysroot=C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/Emscripten/emscripten/cache/sysroot\"");
+        
+        sb.Append(" --output_eol linux");
+        sb.Append(" --memory-init-file 0");
+        sb.Append(" -s WASM=1");
+        sb.Append(" -O3");
+        sb.Append(" -g2");
+        sb.Append(" -s NO_EXIT_RUNTIME=1");
+        // sb.Append(" -s \"DISABLE_EXCEPTION_CATCHING=0\"");
+        // sb.Append(" -s \"DYNCALLS=1\"");
+        sb.Append(" -s \"INITIAL_MEMORY=32MB\"");
+        sb.Append(" -s \"ALLOW_MEMORY_GROWTH=1\"");
+        sb.Append(" -s \"ASSERTIONS=1\"");
+        sb.Append(" -s \"DEMANGLE_SUPPORT=1\"");
+
+        // sb.Append(" \"--sysroot=C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/Emscripten/emscripten/cache/sysroot\"");
+        
         sb.Append(" \"-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp/pch\"");
         sb.Append(" \"-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp\"");
         sb.Append(" \"-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Include\"");
         sb.Append(" \"-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Platforms/WebGL/Include\"");
         sb.Append(" \"-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/bdwgc/include\"");
-        // sb.Append(" --exclude-file \"*upstream*\"");
-        sb.Append(" -Oz");
+
         sb.Append(" -s STANDALONE_WASM");
         sb.Append(" --no-entry");
         sb.Append(" -o il2cpp_wasm/index.wasm");
@@ -139,5 +159,243 @@ public static class uWAVMConsole
         
         File.WriteAllText("command", sb.ToString());
         Debug.Log(sb.ToString());
+    }
+
+    [MenuItem("uWAVM/EMCCCompileCPP")]
+    static void EMCCCompileCPP()
+    {
+        StringBuilder sb = new StringBuilder();
+        foreach (string file in Directory.GetFiles(Application.dataPath + "/../il2cpp_cpp","*.c*", SearchOption.AllDirectories))
+        {
+            Debug.Log(file);
+            
+            if (!IsAssemblyOrTest(file)) continue;
+            sb.Clear();
+            // sb.Append(" emcc -D__webgl__ -Wno-warn-absolute-paths -Wno-c++11-extensions -Wno-nonportable-include-path -ffunction-sections -fno-unwind-tables -fomit-frame-pointer -fno-threadsafe-statics -std=c++11 -Wno-#warnings -Wswitch -Wno-trigraphs -Wno-tautological-compare -Wno-invalid-offsetof -Wno-implicitly-unsigned-literal -Wno-integer-overflow -Wno-shift-negative-value -Wno-unknown-attributes -Wno-implicit-function-declaration -Wno-null-conversion -Wno-missing-declarations -Wno-unused-value -Wno-pragma-once-outside-header -fvisibility=hidden -fno-rtti -flto -fno-strict-overflow -ffunction-sections -fdata-sections -fmessage-length=0 -pipe -DBASELIB_INLINE_NAMESPACE=il2cpp_baselib -DIL2CPP_MONO_DEBUGGER_DISABLED -DRUNTIME_IL2CPP -DHAVE_BDWGC_GC -DNDEBUG -I\".\" -I\"il2cpp_cpp/cpp\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp/pch\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Include\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Platforms/WebGL/Include\" -O0 -fcolor-diagnostics -fdiagnostics-absolute-paths -UGC_THREADS -UUSE_MMAP -UUSE_MUNMAP -c -xc++ -v");
+
+            if (file.Contains(".cpp"))
+                sb.Append(" emcc -Wno-warn-absolute-paths -Wno-c++11-extensions -Wno-nonportable-include-path -ffunction-sections -fno-unwind-tables -fomit-frame-pointer -fno-threadsafe-statics -std=c++11 -Wno-#warnings -Wswitch -Wno-trigraphs -Wno-tautological-compare -Wno-invalid-offsetof -Wno-implicitly-unsigned-literal -Wno-integer-overflow -Wno-shift-negative-value -Wno-unknown-attributes -Wno-implicit-function-declaration -Wno-null-conversion -Wno-missing-declarations -Wno-unused-value -Wno-pragma-once-outside-header -fvisibility=hidden -fexceptions -fno-rtti -flto -fno-strict-overflow -ffunction-sections -fdata-sections -fmessage-length=0 -pipe -DBASELIB_INLINE_NAMESPACE=il2cpp_baselib -DIL2CPP_MONO_DEBUGGER_DISABLED -DRUNTIME_IL2CPP -DHAVE_BDWGC_GC -DNDEBUG -I\".\" -I\"il2cpp_cpp/cpp\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp/pch\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Include\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Platforms/WebGL/Include\" -Oz -fcolor-diagnostics -fdiagnostics-absolute-paths -UGC_THREADS -UUSE_MMAP -UUSE_MUNMAP -c -xc++ -v");
+            else
+                sb.Append(" emcc -Wno-warn-absolute-paths -Wno-c++11-extensions -Wno-nonportable-include-path -ffunction-sections -fno-unwind-tables -fomit-frame-pointer -Wno-#warnings -Wswitch -Wno-trigraphs -Wno-tautological-compare -Wno-invalid-offsetof -Wno-implicitly-unsigned-literal -Wno-integer-overflow -Wno-shift-negative-value -Wno-unknown-attributes -Wno-implicit-function-declaration -Wno-null-conversion -Wno-missing-declarations -Wno-unused-value -Wno-pragma-once-outside-header -fvisibility=hidden -fexceptions -flto -fno-strict-overflow -ffunction-sections -fdata-sections -fmessage-length=0 -pipe -DBASELIB_INLINE_NAMESPACE=il2cpp_baselib -DIL2CPP_MONO_DEBUGGER_DISABLED -DRUNTIME_IL2CPP -DHAVE_BDWGC_GC -DNDEBUG -I\".\" -I\"il2cpp_cpp/cpp\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp/pch\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Include\" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Platforms/WebGL/Include\" -Oz -fcolor-diagnostics -fdiagnostics-absolute-paths -UGC_THREADS -UUSE_MMAP -UUSE_MUNMAP -c -xc -v");
+            
+            sb.Append($" -o \"il2cpp_o/{Path.GetFileNameWithoutExtension(file)}.o\"");
+            
+            // sb.Append("emcc");
+            string formatted = file.Replace('\\', '/');
+            sb.Append($" \"{formatted}\"");
+            
+            Debug.Log( sb.ToString());
+
+            Process cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.Start();
+
+            // cmd.StandardInput.WriteLine("echo %cd%");
+            cmd.StandardInput.WriteLine(sb.ToString());
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            Debug.Log(cmd.StandardOutput.ReadToEnd());
+
+            // return;
+        }
+    }
+    
+    [MenuItem("uWAVM/EditEMARAndRun")]
+    static void EditEmarAndRun()
+    {
+        StringBuilder sb = new StringBuilder();
+        string rsp = File.ReadAllText(Application.dataPath + "/../Library/Bee/artifacts/rsp/17016374809008006955.rsp");
+        
+        var lines=Regex.Matches(rsp, @"""(\\""|[^""])*?""|[^ ]+", RegexOptions.ExplicitCapture)
+            .Cast<Match>()
+            .Select(m => m.Value)
+            .ToArray();
+
+        foreach (string line in lines)
+        {
+            if (line.Contains("GameAssembly"))
+            {
+                Debug.Log("OMIT  " + line);
+                continue;
+            }
+            if (line.Contains("qcL"))
+            {
+                sb.Append($"qcL \"{Application.dataPath}/../il2cpp_o/GameAssembly..bc\" ");
+            }
+            else
+            {
+                // Debug.Log(line);
+                sb.Append($"{line} ");
+            }
+        }
+        
+        // sb.Append($"qcL \"{Application.dataPath}/../il2cpp_o/GameAssembly..bc\" ");
+        
+        foreach (string file in Directory.GetFiles(Application.dataPath + "/../il2cpp_o", "*.o", SearchOption.AllDirectories))
+        {
+            sb.Append($"\"il2cpp_o/{Path.GetFileName(file)}\" ");
+        }
+        
+        Debug.Log(sb.ToString());
+        
+        File.WriteAllText("emar_command.rsp", sb.ToString());
+        // RunCMD($"emar @{sb.ToString()}");
+    }
+    
+    [MenuItem("uWAVM/EditEMCCAndRun")]
+    static void EditEMCCAndRun()
+    {
+        StringBuilder sb = new StringBuilder();
+        // sb.Append(" -s STANDALONE_WASM ");
+        sb.Append(" --no-entry -s STANDALONE_WASM -v --js-library \"Assets/_uWAVM/Plugins/uWAVM.jslib\" ");
+        
+        string rsp = File.ReadAllText(Application.dataPath + "/../Library/Bee/artifacts/rsp/8995565923215908413.rsp");
+        
+        var lines=Regex.Matches(rsp, @"""(\\""|[^""])*?""|[^ ]+", RegexOptions.ExplicitCapture)
+            .Cast<Match>()
+            .Select(m => m.Value)
+            .ToArray();
+
+        for (int i = 0; i < lines.Length; ++i)
+        {
+            if (lines[i].Contains("-s") && lines[i+1].Contains("EXPORTED_RUNTIME_METHODS"))
+            {
+                sb.Append("-s \"EXPORTED_FUNCTIONS=[");
+                sb.Append("\'_uWAVMAPI_GetFirstType_mFC6AD71DD2B29E776F6435848D877D9D598EFEB7\',");
+                sb.Append("\'_uWAVMAPI_UpdateAllBehaviours_m133FB3208ED997C88BF1F454C312B364E4747364\'");
+                // sb.Append("\'SetRotationExtern\'");
+                // sb.Append("\'addRunDependency\',");
+                // sb.Append("\'removeRunDependency\',");
+                // sb.Append("\'FS_createPath\',");
+                // sb.Append("\'FS_createDataFile\',");
+                // sb.Append("\'ccall\',");
+                // sb.Append("\'cwrap\',");
+                // sb.Append("\'stackTrace\'");
+                sb.Append("]\" ");
+                i++;
+            }
+            else if (lines[i].Contains("GameAssembly"))
+            {
+                sb.Append($"\"{Application.dataPath}/../il2cpp_o/GameAssembly..bc\" ");
+            }
+            else if (lines[i] == "-o")
+            {
+                sb.Append($"-o \"{Application.dataPath}/../il2cpp_wasm/index.js\" ");
+                i++;
+            }
+            // else if (lines[i].Contains("--js-library") || lines[i].Contains("--pre-js"))
+            // {
+            //     Debug.Log($"OMIT {lines[i]} {lines[i+1]}");
+            //     i++;
+            // }
+            else if (lines[i].Contains("modules_optsize"))
+            {
+                
+            }
+            else
+            {
+                sb.Append($"{lines[i]} ");
+            }
+        }
+        
+        // sb.Append("--js-library \"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/lib/SystemInfo.js\" ");
+        
+        // sb.Append("\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/lib/modules_optsize/WebGLSupport_CoreModule_Dynamic.bc\" ");
+        // sb.Append("\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/lib/modules_optsize/WebGLSupport_JSONSerializeModule_Dynamic.bc\" ");
+        // sb.Append("\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/lib/modules_optsize/WebGLSupport_WebGLModule_Dynamic.bc\" ");
+        sb.Append("\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/lib/modules_optsize/WebGLSupport_RuntimeInitializeOnLoadManagerInitializerModule_Dynamic.bc\" ");
+        sb.Append("\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/BuildTools/lib/modules_optsize/WebGLSupport_SharedInternalsModule_Dynamic.bc\" ");
+        
+        // sb.Append("--no-entry -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s STANDALONE_WASM -v");
+
+        Debug.Log(sb.ToString());
+        
+        File.WriteAllText("emcc_command.rsp", sb.ToString());
+        // RunCMD($"emar @{sb.ToString()}");
+    }
+
+    static void RunCMD(string command)
+    {
+        Process cmd = new Process();
+        cmd.StartInfo.FileName = "cmd.exe";
+        cmd.StartInfo.RedirectStandardInput = true;
+        cmd.StartInfo.RedirectStandardOutput = true;
+        cmd.StartInfo.CreateNoWindow = true;
+        cmd.StartInfo.UseShellExecute = false;
+        cmd.Start();
+
+        // cmd.StandardInput.WriteLine("echo %cd%");
+        cmd.StandardInput.WriteLine(command);
+        cmd.StandardInput.Flush();
+        cmd.StandardInput.Close();
+
+        cmd.OutputDataReceived += (sender, args) => Debug.Log(args.Data);
+        cmd.ErrorDataReceived += (sender, args) => Debug.Log(args.Data);
+        
+        // Debug.Log(cmd.StandardOutput.ReadToEnd());
+    }
+    
+    
+    public static IEnumerable<String> ParseText(String line, Char delimiter, Char textQualifier)
+    {
+
+        if (line == null)
+            yield break;
+
+        else
+        {
+            Char prevChar = (char) 0;
+            Char nextChar = (char) 0;
+            Char currentChar = (char) 0;
+
+            Boolean inString = false;
+
+            StringBuilder token = new StringBuilder();
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                currentChar = line[i];
+
+                if (i > 0)
+                    prevChar = line[i - 1];
+                else
+                    prevChar = (char) 0;
+
+                if (i + 1 < line.Length)
+                    nextChar = line[i + 1];
+                else
+                    nextChar = (char) 0;
+
+                if (currentChar == textQualifier && (prevChar == (char) 0 || prevChar == delimiter) && !inString)
+                {
+                    inString = true;
+                    continue;
+                }
+
+                if (currentChar == textQualifier && (nextChar == (char) 0 || nextChar == delimiter) && inString)
+                {
+                    inString = false;
+                    continue;
+                }
+
+                if (currentChar == delimiter && !inString)
+                {
+                    yield return token.ToString();
+                    token = token.Remove(0, token.Length);
+                    continue;
+                }
+
+                token = token.Append(currentChar);
+
+            }
+
+            yield return token.ToString();
+
+        } 
     }
 }

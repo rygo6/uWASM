@@ -8,14 +8,33 @@ Depending, I will keep this going forward until the 'wasm component' workflow is
 First run a WebGL build to get all staging data in Temp folder.
 
 Run this command in powershell:
-```
+<!-- ```
 . "C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\il2cpp/build/deploy/UnityLinker.exe"  --search-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --out="C:/Developer/uWAVM/il2cpp_stripped" --include-link-xml="C:/Developer/uWAVM/il2cpp_managed/TypesInScenes.xml" --include-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --rule-set=Experimental --dotnetprofile=unityaot-linux --dotnetruntime=Il2Cpp --architecture=EmscriptenJavaScript --platform=WebGL --use-editor-options --enable-engine-module-stripping --engine-modules-asset-file="C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/modules.asset" --editor-data-file="C:/Developer/uWAVM/il2cpp_managed/EditorToUnityLinkerData.json" --include-unity-root-assembly="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed/uWAVMTests.dll" --print-command-line
-```
+``` -->
 
+``` from dag
+. "C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\il2cpp/build/deploy/UnityLinker.exe" --search-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --out="C:/Developer/uWAVM/il2cpp_stripped" --include-link-xml="C:/Developer/uWAVM/il2cpp_managed/TypesInScenes.xml" --include-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --rule-set=Experimental --dotnetprofile=unityaot-linux --dotnetruntime=Il2Cpp --architecture=EmscriptenJavaScript --platform=WebGL --use-editor-options --editor-settings-flag=None,Development --enable-engine-module-stripping --engine-modules-asset-file="C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/modules.asset" --editor-data-file="C:/Developer/uWAVM/il2cpp_managed/EditorToUnityLinkerData.json" --include-unity-root-assembly="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed/uWAVMTests.dll" --print-command-line
+
+
+. "C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\il2cpp/build/deploy/UnityLinker.exe" --search-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --out="C:/Developer/uWAVM/il2cpp_stripped" --include-link-xml="C:/Developer/uWAVM/il2cpp_managed/TypesInScenes.xml" --include-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --rule-set=Experimental --dotnetprofile=unityaot-linux --dotnetruntime=Il2Cpp --architecture=EmscriptenJavaScript --platform=WebGL --use-editor-options --enable-engine-module-stripping --engine-modules-asset-file="C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/modules.asset" --editor-data-file="C:/Developer/uWAVM/il2cpp_managed/EditorToUnityLinkerData.json" --include-unity-root-assembly="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed/uWAVMTests.dll" --print-command-line
+```
+Can just delete dlls from staging managed area and they don't get included? does the search directory option make it auto include unnecesary things?
 
 Run next in powershell:
-```
+<!-- ```
 . "C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\il2cpp/build/deploy/il2cpp.exe" --convert-to-cpp --assembly="il2cpp_stripped/mscorlib.dll"  --assembly="il2cpp_stripped/uWAVMBehaviour.dll" --assembly="il2cpp_stripped/uWAVMTests.dll" --data-folder="C:/Developer/uWAVM/il2cpp_data" --generatedcppdir="C:/Developer/uWAVM/il2cpp_cpp" --emit-method-map --dotnetprofile=unityaot-linux
+``` -->
+
+``` from dag
+. "C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\il2cpp/build/deploy/il2cpp.exe" --convert-to-cpp --assembly="il2cpp_stripped/mscorlib.dll" --assembly="il2cpp_stripped/System.Core.dll" --assembly="il2cpp_stripped/System.dll" --assembly="il2cpp_stripped/UnityEngine.CoreModule.dll" --assembly="il2cpp_stripped/UnityEngine.dll" --assembly="il2cpp_stripped/UnityEngine.SharedInternalsModule.dll" --assembly="il2cpp_stripped/uWAVMBehaviour.dll" --assembly="il2cpp_stripped/uWAVMTests.dll" --data-folder="C:/Developer/uWAVM/il2cpp_data" --generatedcppdir="C:/Developer/uWAVM/il2cpp_cpp/cpp" --emit-method-map --generics-option=None,EnableFullSharing --dotnetprofile=unityaot-linux --profiler-output-file="C:/Developer/uWAVM/il2cpp_stripped/il2cpp_conv.traceevents" --profiler-report --print-command-line
+```
+
+``` from dag
+. "C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/Tools/BuildPipeline/ClassRegistrationGenerator.exe" --enable-stripping "il2cpp_stripped/UnityLinkerToEditorData.json" "il2cpp_managed/EditorToUnityLinkerData.json" "C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/modules.asset" "il2cpp_cpp/UnityClassRegistration.cpp"
+```
+
+``` from dag
+. "C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/Tools/InternalCallRegistrationWriter/InternalCallRegistrationWriter.exe" -output="il2cpp_cpp/UnityICallRegistration.cpp" -summary="il2cpp_cpp/icallsummary.txt" -assembly="il2cpp_stripped/UnityEngine.CoreModule.dll;il2cpp_stripped/UnityEngine.SharedInternalsModule.dll"
 ```
 
 
@@ -23,6 +42,13 @@ Ensure latest emscripten is installed and run this in powershell. Update the exp
 ```
 emcc il2cpp_cpp/uWAVMtests.cpp il2cpp_cpp/Il2CppMetadataUsage.c "-IC:/Developer/uWAVM/il2cpp_cpp" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp/pch" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Include" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Platforms/WebGL/Include" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/bdwgc/include" -Os -s STANDALONE_WASM --no-entry -o il2cpp_wasm/index.wasm -s EXPORTED_FUNCTIONS='["_TransformRotationTest_Update_mCD4245414D69ACEF0A6EC3E364E9A9C08C489F18", "_TransformRotationTest_Add_m91E818F16AE3F6DFA4DFFBC9946DEAEC450AFB91", "_TransformRotationTest_Sub_m952B493E6D8DFBC21437F0EF0406441ED433CD54", "_TransformRotationTest__ctor_m1DB596213BBC59C50A65251842F03303E8F2B586", "_uWAVMAPI_Instance_m81F3352714F1D0C4614A24377428024CC2B1A5C6"]' -s ERROR_ON_UNDEFINED_SYMBOLS=0 -v
 ```
+
+
+. emcc -D__webgl__ -Wno-warn-absolute-paths -Wno-c++11-extensions -Wno-nonportable-include-path -ffunction-sections -fno-unwind-tables -fomit-frame-pointer -Wno-#warnings -Wswitch -Wno-trigraphs -Wno-tautological-compare -Wno-invalid-offsetof -Wno-implicitly-unsigned-literal -Wno-integer-overflow -Wno-shift-negative-value -Wno-unknown-attributes -Wno-implicit-function-declaration -Wno-null-conversion -Wno-missing-declarations -Wno-unused-value -Wno-pragma-once-outside-header -fvisibility=hidden -fexceptions -flto -fno-strict-overflow -ffunction-sections -fdata-sections -fmessage-length=0 -pipe -DGC_NOT_DLL -DHAVE_BOEHM_GC -DDEFAULT_GC_NAME=\"BDWGC\" -DALL_INTERIOR_POINTERS=1 -DGC_GCJ_SUPPORT=1 -DJAVA_FINALIZATION=1 -DNO_EXECUTE_PERMISSION=1 -DGC_NO_THREADS_DISCOVERY=1 -DIGNORE_DYNAMIC_LOADING=1 -DGC_DONT_REGISTER_MAIN_STATIC_DATA=1 -DGC_VERSION_MAJOR=7 -DGC_VERSION_MINOR=7 -DGC_VERSION_MICRO=0 -DGC_THREADS=1 -DUSE_MMAP=1 -DUSE_MUNMAP=1 -DNDEBUG -I"." -I"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/bdwgc/libatomic_ops/src" -I"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/bdwgc/include" -o "il2cpp_o/gc.o" -Oz -fcolor-diagnostics -fdiagnostics-absolute-paths -UGC_THREADS -UUSE_MMAP -UUSE_MUNMAP -c -xc -v -s STANDALONE_WASM "C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/bdwgc/extra/gc.c"
+
+. emcc -D__webgl__ -Wno-warn-absolute-paths -Wno-c++11-extensions -Wno-nonportable-include-path -ffunction-sections -fno-unwind-tables -fomit-frame-pointer -fno-threadsafe-statics -std=c++11 -Wno-#warnings -Wswitch -Wno-trigraphs -Wno-tautological-compare -Wno-invalid-offsetof -Wno-implicitly-unsigned-literal -Wno-integer-overflow -Wno-shift-negative-value -Wno-unknown-attributes -Wno-implicit-function-declaration -Wno-null-conversion -Wno-missing-declarations -Wno-unused-value -Wno-pragma-once-outside-header -fvisibility=hidden -fexceptions -fno-rtti -flto -fno-strict-overflow -ffunction-sections -fdata-sections -fmessage-length=0 -pipe -DBASELIB_INLINE_NAMESPACE=il2cpp_baselib -DIL2CPP_MONO_DEBUGGER_DISABLED -DRUNTIME_IL2CPP -DHAVE_BDWGC_GC -DNDEBUG -I"." -I"il2cpp_cpp/cpp" -I\"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp/pch" -I"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp" -I"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Include" -I"C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Platforms/WebGL/Include" -o "il2cpp_o/uWAVMTests.o" -Oz -fcolor-diagnostics -fdiagnostics-absolute-paths -UGC_THREADS -UUSE_MMAP -UUSE_MUNMAP -c -xc++ -v -s STANDALONE_WASM "il2cpp_cpp/cpp/uWAVMTests.cpp"
+
+
 
 Convert wasm to wat for debug:
 ```

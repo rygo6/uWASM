@@ -1,0 +1,89 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+// 0x00000001 System.Int32 uWAVM.uWAVMBehavior::get_hashCode()
+extern void uWAVMBehavior_get_hashCode_m1A5D88F6377E0BEF01A077F2F3CFEBE778D175AC (void);
+// 0x00000002 System.Void uWAVM.uWAVMBehavior::Update()
+extern void uWAVMBehavior_Update_m0C486F23D50CF6D33BA4E6289B45857503965E9D (void);
+// 0x00000003 System.Void uWAVM.uWAVMBehavior::SetRotationExtern(System.Single,System.Single,System.Single,System.Int32)
+extern void uWAVMBehavior_SetRotationExtern_m67E6D5CBA330DD7941F966E357D9461C70F62844 (void);
+// 0x00000004 System.Void uWAVM.uWAVMBehavior::SetRotation(System.Single,System.Single,System.Single)
+extern void uWAVMBehavior_SetRotation_m6D1BE4AD3EB53B8D4CE0A8BF783F44D2E0339530 (void);
+// 0x00000005 System.Void uWAVM.uWAVMBehavior::.ctor()
+extern void uWAVMBehavior__ctor_m45B10E80192E3C3F096C8776F6B02B1035589646 (void);
+// 0x00000006 System.Int32 uWAVMTests.uWAVMAPI::CreateInstance(System.Type)
+extern void uWAVMAPI_CreateInstance_mDC1F1CFAAE9700CCEF2CFA7DD1596547DD9B1CAF (void);
+// 0x00000007 System.Int32 uWAVMTests.uWAVMAPI::GetFirstType()
+extern void uWAVMAPI_GetFirstType_mFC6AD71DD2B29E776F6435848D877D9D598EFEB7 (void);
+// 0x00000008 System.Type uWAVMTests.uWAVMAPI::GetTypeByName(System.String)
+extern void uWAVMAPI_GetTypeByName_mC0F6FDBE103EF2DB1496F11FD4221F5481579576 (void);
+// 0x00000009 System.Void uWAVMTests.uWAVMAPI::UpdateAllBehaviours()
+extern void uWAVMAPI_UpdateAllBehaviours_m133FB3208ED997C88BF1F454C312B364E4747364 (void);
+// 0x0000000A System.Void uWAVMTests.uWAVMAPI::DebugLogExtern(System.String)
+extern void uWAVMAPI_DebugLogExtern_m07FFF18E58CC292F6E3CA7A8D091FED5BCE7B554 (void);
+// 0x0000000B System.Void uWAVMTests.uWAVMAPI::.cctor()
+extern void uWAVMAPI__cctor_m9F6A2E3DAF7CC9BF751A0AA2659DB03EC4E305A9 (void);
+// 0x0000000C System.Void uWAVMTests.WasmString::.ctor(System.String)
+extern void WasmString__ctor_mA3652D84D1A9D5284EAE8CFA4D23FCB18E41FF69 (void);
+static Il2CppMethodPointer s_methodPointers[12] = 
+{
+	uWAVMBehavior_get_hashCode_m1A5D88F6377E0BEF01A077F2F3CFEBE778D175AC,
+	uWAVMBehavior_Update_m0C486F23D50CF6D33BA4E6289B45857503965E9D,
+	uWAVMBehavior_SetRotationExtern_m67E6D5CBA330DD7941F966E357D9461C70F62844,
+	uWAVMBehavior_SetRotation_m6D1BE4AD3EB53B8D4CE0A8BF783F44D2E0339530,
+	uWAVMBehavior__ctor_m45B10E80192E3C3F096C8776F6B02B1035589646,
+	uWAVMAPI_CreateInstance_mDC1F1CFAAE9700CCEF2CFA7DD1596547DD9B1CAF,
+	uWAVMAPI_GetFirstType_mFC6AD71DD2B29E776F6435848D877D9D598EFEB7,
+	uWAVMAPI_GetTypeByName_mC0F6FDBE103EF2DB1496F11FD4221F5481579576,
+	uWAVMAPI_UpdateAllBehaviours_m133FB3208ED997C88BF1F454C312B364E4747364,
+	uWAVMAPI_DebugLogExtern_m07FFF18E58CC292F6E3CA7A8D091FED5BCE7B554,
+	uWAVMAPI__cctor_m9F6A2E3DAF7CC9BF751A0AA2659DB03EC4E305A9,
+	WasmString__ctor_mA3652D84D1A9D5284EAE8CFA4D23FCB18E41FF69,
+};
+static const int32_t s_InvokerIndices[12] = 
+{
+	452,
+	468,
+	646,
+	219,
+	468,
+	914,
+	986,
+	942,
+	996,
+	970,
+	996,
+	427,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_uWAVMBehaviour_CodeGenModule;
+const Il2CppCodeGenModule g_uWAVMBehaviour_CodeGenModule = 
+{
+	"uWAVMBehaviour.dll",
+	12,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL, // module initializer,
+	NULL,
+	NULL,
+	NULL,
+};
