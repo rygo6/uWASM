@@ -27,5 +27,10 @@ namespace uWASM
         
         public virtual void Update()
         { }
+        
+        public virtual void OnCollisionEnter(uWASMCollision collision)
+        {
+            
+        }
     }
 }

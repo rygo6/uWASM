@@ -25,17 +25,17 @@ public class uWASMGameObjectEditor : Editor
         
         m_Behaviours = GetImplementations<uWASMBehavior>().Where(impl=>!impl.IsSubclassOf(typeof(UnityEngine.Object))).ToArray();
 
-        if (m_BehaviourProperty.managedReferenceValue != null)
+        if (m_BehaviourProperty.exposedReferenceValue != null)
         {
             for (int i = 0; i < m_Behaviours.Length; ++i)
             {
-                if (m_BehaviourProperty.managedReferenceValue.GetType() == m_Behaviours[i])
+                if (m_BehaviourProperty.exposedReferenceValue.GetType() == m_Behaviours[i])
                 {
                     m_BehaviourTypeIndex = i;
                     break;
                 }
             }
-            EditorGUILayout.LabelField($"Loaded Implementation: {m_BehaviourProperty.managedReferenceValue.ToString()}");
+            EditorGUILayout.LabelField($"Loaded Implementation: {m_BehaviourProperty.exposedReferenceValue.ToString()}");
         }
 
         int newIndex = EditorGUILayout.Popup(new GUIContent("Select Behaviour"), m_BehaviourTypeIndex, m_Behaviours.Select(impl => impl.FullName).ToArray());
@@ -43,7 +43,7 @@ public class uWASMGameObjectEditor : Editor
         {
             m_BehaviourTypeIndex = newIndex;
             Debug.Log($"Creating {m_Behaviours[m_BehaviourTypeIndex]} and applying to {host}.");
-            host.m_Behaviour = (uWASMBehavior) Activator.CreateInstance(m_Behaviours[m_BehaviourTypeIndex]);
+            m_BehaviourProperty.managedReferenceValue = (uWASMBehavior) Activator.CreateInstance(m_Behaviours[m_BehaviourTypeIndex]);
         }
 
         serializedObject.ApplyModifiedProperties();

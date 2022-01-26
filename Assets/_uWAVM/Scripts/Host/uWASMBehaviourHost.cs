@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Wasmtime;
 
 namespace uWASM
 {
@@ -32,6 +34,11 @@ namespace uWASM
             m_Engine.InstanceBehaviour(m_Behaviour.ToString(), this);
             
             m_Engine.AwakeBehaviour(m_InstanceId);
+        }
+
+        void OnCollisionEnter(Collision other)
+        {
+            // m_Engine.OnCollisionEnterBehaviour(m_InstanceId, other);
         }
 
         void Start()

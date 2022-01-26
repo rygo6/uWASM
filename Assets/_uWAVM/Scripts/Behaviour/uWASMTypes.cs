@@ -39,4 +39,9 @@ namespace uWASM
     private static extern void SetEulerAngles(int instanceId, Vector3 value);
 
   }
+  
+  public class uWASMCollision
+  {
+    public ContactPoint[] contacts { get; }
+  }
 }
