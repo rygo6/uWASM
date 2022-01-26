@@ -1,28 +1,28 @@
 using System;
-using System.Collections.Generic;
-using uWAVM;
+using UnityEngine;
 
-namespace uWAVMTests
+namespace uWASM
 {
     [Serializable]
-    public class TransformRotationTest : uWAVMBehavior
+    public class TransformRotationTest : uWASMBehavior
     {
         public float m_RotationSpeed = 1;
-        public List<string> m_StringList = new List<string>();
-        
+
         float m_YRotation = 0;
-        
+
+        public override void CreateInstance(int behaviorInstanceId, int transformInstanceId)
+        {
+            m_InstanceID = behaviorInstanceId;
+            transform = new uWASMTransform(transformInstanceId);
+            uWASMAPI.RegisterBehavior(this);
+        }
+
         public override void Update()
         {
             m_YRotation = m_YRotation + 1f;
-            SetRotation(0, m_YRotation, 0);
-
-            string newString = "";
-            for (int i = 0; i < 3; ++i)
-            {
-                newString += i;
-            }
-            m_StringList.Add(newString);
+            Vector3 euler = transform.eulerAngles;
+            euler.y = m_YRotation;
+            transform.eulerAngles = euler;
         }
 
         public int Add(int a, int b)

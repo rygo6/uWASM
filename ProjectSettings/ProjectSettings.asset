@@ -622,7 +622,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     Standalone: FORCE_UWAVM
-    WebGL: FORCE_UWAVM
+    WebGL: FORCE_UWASM!
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

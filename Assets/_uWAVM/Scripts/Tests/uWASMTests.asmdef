@@ -1,0 +1,16 @@
+{
+    "name": "uWAVMTests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8607241292323ec4a94bd8e392f3f93f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

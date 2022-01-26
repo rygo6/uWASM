@@ -15,7 +15,7 @@ Run this command in powershell:
 ``` from dag
 . "C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\il2cpp/build/deploy/UnityLinker.exe" --search-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --out="C:/Developer/uWAVM/il2cpp_stripped" --include-link-xml="C:/Developer/uWAVM/il2cpp_managed/TypesInScenes.xml" --include-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --rule-set=Experimental --dotnetprofile=unityaot-linux --dotnetruntime=Il2Cpp --architecture=EmscriptenJavaScript --platform=WebGL --use-editor-options --editor-settings-flag=None,Development --enable-engine-module-stripping --engine-modules-asset-file="C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/modules.asset" --editor-data-file="C:/Developer/uWAVM/il2cpp_managed/EditorToUnityLinkerData.json" --include-unity-root-assembly="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed/uWAVMTests.dll" --print-command-line
 
-
+//release
 . "C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\il2cpp/build/deploy/UnityLinker.exe" --search-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --out="C:/Developer/uWAVM/il2cpp_stripped" --include-link-xml="C:/Developer/uWAVM/il2cpp_managed/TypesInScenes.xml" --include-directory="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed" --rule-set=Experimental --dotnetprofile=unityaot-linux --dotnetruntime=Il2Cpp --architecture=EmscriptenJavaScript --platform=WebGL --use-editor-options --enable-engine-module-stripping --engine-modules-asset-file="C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WebGLSupport/modules.asset" --editor-data-file="C:/Developer/uWAVM/il2cpp_managed/EditorToUnityLinkerData.json" --include-unity-root-assembly="C:/Developer/uWAVM/Temp/StagingArea/Data/Managed/uWAVMTests.dll" --print-command-line
 ```
 Can just delete dlls from staging managed area and they don't get included? does the search directory option make it auto include unnecesary things?
@@ -41,6 +41,9 @@ Run next in powershell:
 Ensure latest emscripten is installed and run this in powershell. Update the exported function names and put a _ before the name! Disable ERROR_ON_UNDEFINED_SYMBOLS to get the 'import' function generated:
 ```
 emcc il2cpp_cpp/uWAVMtests.cpp il2cpp_cpp/Il2CppMetadataUsage.c "-IC:/Developer/uWAVM/il2cpp_cpp" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp/pch" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/libil2cpp" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Include" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/baselib/Platforms/WebGL/Include" "-IC:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/il2cpp/external/bdwgc/include" -Os -s STANDALONE_WASM --no-entry -o il2cpp_wasm/index.wasm -s EXPORTED_FUNCTIONS='["_TransformRotationTest_Update_mCD4245414D69ACEF0A6EC3E364E9A9C08C489F18", "_TransformRotationTest_Add_m91E818F16AE3F6DFA4DFFBC9946DEAEC450AFB91", "_TransformRotationTest_Sub_m952B493E6D8DFBC21437F0EF0406441ED433CD54", "_TransformRotationTest__ctor_m1DB596213BBC59C50A65251842F03303E8F2B586", "_uWAVMAPI_Instance_m81F3352714F1D0C4614A24377428024CC2B1A5C6"]' -s ERROR_ON_UNDEFINED_SYMBOLS=0 -v
+
+
+. "C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\PlaybackEngines\WebGLSupport\BuildTools\Emscripten\emscripten\emcc.bat" "@emcc_command.rsp"
 ```
 
 
