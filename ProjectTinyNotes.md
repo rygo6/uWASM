@@ -5,397 +5,79 @@ $env:EM_CONFIG = 'C:\Developer\ProjectTinySamples\Tiny3D\Library\DotsRuntimeBuil
 $env:EMSDK_PYTHON = 'C:\Developer\ProjectTinySamples\Tiny3D\Library\DotsRuntimeBuild\artifacts\Stevedore\winpython2-x64_740e\WinPython-64bit-2.7.13.1Zero\python-2.7.13.amd64\python.exe'
 $env:EMCC_SKIP_SANITY_CHECK = '1'
 
-
-
-. .\artifacts\Stevedore\il2cpp_718b\build\deploy\net471\UnityLinker.exe --out="artifacts/uWAVMTests/uwavmtests-uwavm_stripped" --use-dots-options --dotnetprofile=unitytiny --include-public-assembly="artifacts/uWAVMTests/uwavmtests-uwavm/post_typereg/Unity.Runtime.EntryPoint.exe" --include-public-assembly="artifacts/uWAVMTests/uwavmtests-uwavm/post_typereg/uWAVMTests.dll" --include-directory="artifacts/uWAVMTests/uwavmtests-uwavm/post_typereg" --platform=WebGL --architecture=EmscriptenJavaScript --rule-set=experimental
-
-
-. .\artifacts\Stevedore\il2cpp_718b\build\deploy\netcoreapp3.1\win-x64\publish\il2cpp.exe --convert-to-cpp --generatedcppdir artifacts/uWAVMTests/uwavmtests-uwavm_stripped/il2cpp-src --dotnetprofile=unitytiny --libil2cpp-static --emit-null-checks=0 --enable-array-bounds-check=0 --development-mode --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Runtime.EntryPoint.exe --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/uWAVMTests.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Tiny.Burst.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.ZeroJobs.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.LowLevel.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Tiny.IO.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/uWAVMBehaviour.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/mscorlib.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/netstandard.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Burst.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/UnsafeUtility.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Tiny.UnityInstance.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Platforms.RunLoop.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Platforms.Common.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Collections.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Entities.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Entities.Runtime.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Mathematics.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Scenes.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Properties.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Collections.LowLevel.ILSupport.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Mathematics.Extensions.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Properties.Reflection.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Serialization.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Jobs.dll --assembly artifacts/uWAVMTests/uwavmtests-uwavm_stripped/Unity.Transforms.dll --entry-assembly-name=uWAVMTests
-
-
-RUN THESE THREE
-cd C:\Developer\ProjectTinySamples\Tiny3D\Library\DotsRuntimeBuild>
+cd C:\Developer\ProjectTinySamples\Tiny3D\Library\DotsRuntimeBuild
 . .\artifacts\Stevedore\winpython2-x64_740e\WinPython-64bit-2.7.13.1Zero\python-2.7.13.amd64\python.exe .\artifacts\Stevedore\emscripten-win\emcc.py "@artifacts\rsp\StandaloneTest.rsp"
-wasm2wat.exe .\artifacts\uWASMTests\uwasmtests-uwasm\uWASMTests.wasm -o .\artifacts\uWASMTests\uwasmtests-uwasm\uWASMTests.wat
+wasm2wat.exe .\artifacts\SlicesSDK\slicessdk-examplebuild\SlicesSDK.wasm -o .\artifacts\SlicesSDK\slicessdk-examplebuild\SlicesSDK.wat
 
 
 
+It appears like I probably want to make an entirely new CSharpApplication.bee.cs for bee.
+
+1. Build out my own EntryPoint.exe with only the bare essentials I need. mscorlib, netstandard
+```
+. "artifacts\Stevedore\roslyn-csc-win64_7bcb\csc.exe" /nostdlib /noconfig /shared -out:"artifacts/Unity.Runtime.EntryPoint.exe/slicessdk-examplebuild/Unity.Runtime.EntryPoint.exe" /refout:"artifacts\Unity.Runtime.EntryPoint.exe\slicessdk-examplebuild\Unity.Runtime.EntryPoint.ref.exe" -unsafe -warnaserror -define:UNITY_DOTSPLAYER -define:UNITY_DOTSRUNTIME -define:UNITY_2018_3_OR_NEWER -define:UNITY_2019_1_OR_NEWER -define:UNITY_2019_2_OR_NEWER -define:UNITY_2019_3_OR_NEWER -define:UNITY_2020_1_OR_NEWER -define:UNITY_ENTITIES_0_12_OR_NEWER -define:NET_DOTS -define:UNITY_DISABLE_MANAGED_COMPONENTS -define:UNITY_DOTSPLAYER32 -define:UNITY_DOTSRUNTIME32 -define:UNITY_WEBGL -define:UNITY_SINGLETHREADED_JOBS -define:UNITY_DOTSPLAYER_IL2CPP -define:UNITY_DOTSRUNTIME_IL2CPP -r:"artifacts/Stevedore/il2cpp_718b/build/profiles/TinyStandard/netstandard.dll" "C:\Developer\ProjectTinySamples\Tiny3D\Packages\com.unity.platforms.slices@0.10.0-preview.10\Runtime\Main.cs" -langversion:7.3 -fullpaths /optimize+ /debug:portable /nologo /deterministic /RuntimeMetadataVersion:v4.0.30319
+```
+
+
+artifacts/Stevedore/refassemblies-netstandard2_e589/netstandard.dll
+artifacts/Stevedore/refassemblies-netstandard2_e589/Facades/mscorlib.dll
+artifacts/Stevedore/il2cpp_718b/build/profiles/TinyStandard/netstandard.dll
+
+2. Build out my own .dll of my assembly, only including the things I need. netstandard, mscorlib, entrypoint
+```
+. artifacts\Stevedore\roslyn-csc-win64_7bcb\csc.exe /nostdlib /noconfig /shared -target:library -out:"artifacts/SlicesSDK.dll/slicessdk-examplebuild/SlicesSDK.dll" /refout:"artifacts\SlicesSDK.dll\slicessdk-examplebuild\SlicesSDK.ref.dll" -unsafe -define:UNITY_DOTSPLAYER -define:UNITY_DOTSRUNTIME -define:UNITY_2018_3_OR_NEWER -define:UNITY_2019_1_OR_NEWER -define:UNITY_2019_2_OR_NEWER -define:UNITY_2019_3_OR_NEWER -define:UNITY_2020_1_OR_NEWER -define:UNITY_ENTITIES_0_12_OR_NEWER -define:NET_DOTS -define:UNITY_DISABLE_MANAGED_COMPONENTS -define:UNITY_DOTSPLAYER32 -define:UNITY_DOTSRUNTIME32 -define:UNITY_WEBGL -define:UNITY_SINGLETHREADED_JOBS -define:UNITY_DOTSPLAYER_IL2CPP -define:UNITY_DOTSRUNTIME_IL2CPP -r:"artifacts/Stevedore/il2cpp_718b/build/profiles/TinyStandard/netstandard.dll" -r:"artifacts/Unity.Runtime.EntryPoint.exe/slicessdk-examplebuild/Unity.Runtime.EntryPoint.ref.exe" "C:\Developer\ProjectTinySamples\Tiny3D\Assets\SlicesSDK\Scripts\ExampleClass.cs" -langversion:7.3 -fullpaths /optimize+ /debug:portable /nologo /deterministic /RuntimeMetadataVersion:v4.0.30319
+```
+
+3. Strip dlls
+// Not using the mscorlib and netsnard that went through typereg which I put in post_typereg breaks il2cpp???
+```
+. artifacts\Stevedore\il2cpp_718b\build\deploy\net471\UnityLinker.exe --out="artifacts/SlicesSDK/slicessdk-examplebuild_stripped" --use-dots-options --dotnetprofile=unitytiny --include-public-assembly="artifacts/Unity.Runtime.EntryPoint.exe/slicessdk-examplebuild/Unity.Runtime.EntryPoint.exe" --include-public-assembly="artifacts/SlicesSDK.dll/slicessdk-examplebuild/SlicesSDK.dll" --include-directory="artifacts/SlicesSDK/slicessdk-examplebuild/no_post" --platform=WebGL --architecture=EmscriptenJavaScript --rule-set=experimental
+```
+
+
+4. Convert to CPP
+
+```
+. artifacts\Stevedore\il2cpp_718b\build\deploy\netcoreapp3.1\win-x64\publish\il2cpp.exe --convert-to-cpp --generatedcppdir artifacts/SlicesSDK/slicessdk-examplebuild_stripped/il2cpp-src --dotnetprofile=unitytiny --libil2cpp-static --emit-null-checks=0 --enable-array-bounds-check=0 --assembly artifacts/SlicesSDK/slicessdk-examplebuild_stripped/Unity.Runtime.EntryPoint.exe --assembly artifacts/SlicesSDK/slicessdk-examplebuild_stripped/SlicesSDK.dll --assembly artifacts/SlicesSDK/slicessdk-examplebuild_stripped/mscorlib.dll --assembly artifacts/SlicesSDK/slicessdk-examplebuild_stripped/netstandard.dll --entry-assembly-name=SlicesSDK
+```
 
 
 
---memory-init-file
-0
--s
-USE_PTHREADS=0
--s
-WASM=1
--Oz
--g2
---llvm-lto
-0
--s
-NO_EXIT_RUNTIME=1
--s
-"PRECISE_F32=0"
--s
-"DISABLE_EXCEPTION_CATCHING=1"
--s
-"ASSERTIONS=1"
--s
-"USE_WEBGL2=1"
--s
-"MEMFS_APPEND_TO_TYPED_ARRAYS=1"
--s
-"LEGACY_GL_EMULATION=0"
--s
-"ERROR_ON_UNDEFINED_SYMBOLS=1"
--s
-"NO_FILESYSTEM=1"
--s
-"ENVIRONMENT=web"
--s
-"PROXY_POSIX_SOCKETS=0"
--s
-"EVAL_CTORS=0"
--s
-"SUPPORT_ERRNO=0"
--s
-"FETCH_SUPPORT_INDEXEDDB=0"
--s
-"USE_FETCH_WORKER=0"
--s
-"ALLOW_MEMORY_GROWTH=1"
--s
-"GL_DISABLE_HALF_FLOAT_EXTENSION_IF_BROKEN=1"
--s
-"MALLOC=emmalloc"
--s
-"DEMANGLE_SUPPORT=1"
-"artifacts/uWAVMTests/uwavmtests-uwavm/sfzo/xxhash.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/driver.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods2.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods3.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods4.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics2.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics3.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics4.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics5.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics6.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics7.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics8.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions2.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions3.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions4.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions5.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions6.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions7.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions8.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/ModuleInitializers.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/mscorlib.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/mscorlib_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/netstandard.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/StaticInitialization.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/StringLiterals.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/TinyMethods.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/TinyTypes.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Burst.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Collections.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Collections.LowLevel.ILSupport.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Collections_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities.Runtime.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities.Runtime_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities2.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities3.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities4.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Jobs.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.LowLevel.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Mathematics.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Mathematics.Extensions.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Mathematics_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Platforms.Common.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Platforms.RunLoop.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Properties.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Properties.Reflection.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Runtime.EntryPoint.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Runtime.EntryPoint_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Scenes.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Scenes_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Serialization.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Tiny.Burst.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Tiny.IO.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Tiny.UnityInstance.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Tiny.UnityInstance_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Transforms.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Transforms1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Transforms_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.ZeroJobs.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.ZeroJobs_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/UnsafeUtility.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/uWAVMBehaviour.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/uWAVMBehaviour_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/uWAVMTests.o"
--o
-"artifacts/uWAVMTests/uwavmtests-uwavm/uWAVMTests.html"
-"artifacts/libil2cpptiny/uwavmtests-uwavm/libil2cpptiny.bc"
-"artifacts/boehm-gc/uwavmtests-uwavm/boehm-gc.bc"
---pre-js
-"C:/Developer/ProjectTinySamples/Tiny3D/Library/PackageCache/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/WebSupport/tiny_runtime.js"
-"artifacts/lib_unity_tiny_burst/uwavmtests-uwavm/lib_unity_tiny_burst.bc"
-"artifacts/lib_unity_zerojobs/uwavmtests-uwavm/lib_unity_zerojobs.bc"
-"artifacts/lib_unity_lowlevel/uwavmtests-uwavm/lib_unity_lowlevel.bc"
-"artifacts/lib_unity_tiny_io/uwavmtests-uwavm/lib_unity_tiny_io.bc"
-"artifacts/lib_unity_platforms_runloop/uwavmtests-uwavm/lib_unity_platforms_runloop.bc"
-"artifacts/lib_unity_platforms_common/uwavmtests-uwavm/lib_unity_platforms_common.bc"
-"artifacts/lib_unity_entities/uwavmtests-uwavm/lib_unity_entities.bc"
+// Most minimal that works without errors.
+
+. .\artifacts\Stevedore\winpython2-x64_740e\WinPython-64bit-2.7.13.1Zero\python-2.7.13.amd64\python.exe .\artifacts\Stevedore\emscripten-win\emcc.py --memory-init-file 0 -s USE_PTHREADS=0 -s WASM=1 -Oz -g3 --llvm-lto 0 -s NO_EXIT_RUNTIME=1 -s "PRECISE_F32=0" -s "DISABLE_EXCEPTION_CATCHING=1" -s "ASSERTIONS=1" -s "MEMFS_APPEND_TO_TYPED_ARRAYS=1" -s "ERROR_ON_UNDEFINED_SYMBOLS=0" -s "NO_FILESYSTEM=1" -s "ENVIRONMENT=web" -s "PROXY_POSIX_SOCKETS=0" -s "EVAL_CTORS=0" -s "SUPPORT_ERRNO=0" -s "FETCH_SUPPORT_INDEXEDDB=0" -s "USE_FETCH_WORKER=0" -s "ALLOW_MEMORY_GROWTH=1" -s "MALLOC=emmalloc" -s "DEMANGLE_SUPPORT=0" "artifacts/SlicesSDK/slicessdk-examplebuild/sfzo/xxhash.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/driver.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods1.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods2.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods3.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods4.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods5.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics1.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics2.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics3.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics4.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics5.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics6.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics7.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics8.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions1.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions2.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions3.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions4.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions5.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions6.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions7.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions8.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/ModuleInitializers.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/mscorlib.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/mscorlib_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/netstandard.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/SlicesSDK.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/SlicesSDK_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/StaticInitialization.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/StringLiterals.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/TinyMethods.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/TinyTypes.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Burst.o" -o "artifacts/SlicesSDK/slicessdk-examplebuild/SlicesSDK.html" "artifacts/libil2cpptiny/slicessdk-examplebuild/libil2cpptiny.bc" "artifacts/boehm-gc/slicessdk-examplebuild/boehm-gc.bc" "artifacts/Stevedore/nativejobs-WebGL-s_0707/lib/webgl_wasm/develop/libnativejobs.bc" -fno-inline -lGL -s FETCH=1 -s TOTAL_STACK=512KB -s TOTAL_MEMORY=128MB -s ALLOW_MEMORY_GROWTH=1 -s MINIFY_HTML=0 -s ASSERTIONS=0 -s SAFE_HEAP=0 --no-entry -s STANDALONE_WASM -s "EXPORTED_FUNCTIONS=['_ExampleClass_AddList_m0780A0F50F61269F5B39F8FC5D3D7FCD0CA3261C','_ExampleClass_RemoveList_mE17ACA08A83B3EFAE0382FF20D304D2CC7424198','_ExampleClass_RemoveListAllowError_m30DA7B6A1071C102B73CB9A50CC5192AC78038D3','_ExampleClass_AddDictionary_m42019155F6E22E8E25CAC0F2F4F1503E644E9522','_ExampleClass_ClearDictionary_mEEA8BD67FA6DD7CE8CAEA26B6167B071BA5A9317']"
+
+
+But I want to remove
 "artifacts/Stevedore/nativejobs-WebGL-s_0707/lib/webgl_wasm/develop/libnativejobs.bc"
---js-library
-"C:/Developer/ProjectTinySamples/Tiny3D/Library/PackageCache/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/Unity.ZeroJobs/js~/HTMLWrapper.js"
---js-library
-"C:/Developer/ProjectTinySamples/Tiny3D/Library/PackageCache/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/Unity.ZeroJobs/js~/PlayerConnectionHTML.js"
---js-library
-"C:/Developer/ProjectTinySamples/Tiny3D/Library/PackageCache/com.unity.dots.runtime@0.32.0-preview.54/Unity.Tiny.IO/js~/TinyIO.js"
--lGL
--s
-FETCH=1
--s
-TOTAL_STACK=512KB
--s
-TOTAL_MEMORY=128MB
--s
-ALLOW_MEMORY_GROWTH=1
--s
-MINIFY_HTML=1
--s
-ASSERTIONS=0
--s
-SAFE_HEAP=0
--s
-STANDALONE_WASM
---no-entry
--s "EXPORTED_FUNCTIONS=['_main','_uWAVMAPI_UpdateAllBehaviours_mDC82868BDB51855BA491E7F6A9313C4F92F98F57','_uWAVMAPI_TestA_mCFF9F933DBC596C9BEBE81E06C6F224AE4CD88A7','_uWAVMAPI_TestB_m957BF7C71ADDD73DFF4D4CE3AFA21F87CC2A32B1','_uWAVMAPI_TestC_mE53362AF23E704EA2165A3BA61DD4EADF8D0AB3B','_uWAVMAPI_TestD_mBC8EE3781F9246E569A2840C4AE0061222A8EDCD']"
+But it has these errors:
+warning: undefined symbol: Baselib_SystemSemaphore_Create (referenced by top-level compiled C/C++ code)
+warning: undefined symbol: Baselib_SystemSemaphore_Free (referenced by top-level compiled C/C++ code)
+warning: undefined symbol: Baselib_SystemSemaphore_Release (referenced by top-level compiled C/C++ code)
+warning: undefined symbol: detail_AssertLog (referenced by top-level compiled C/C++ code)
+Are these needes, seem related to memory mapped file?
+
+Also seems like I should be able to remove these?
+"artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/TinyMethods.o"
+"artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/TinyTypes.o"
+"artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Burst.o"
 
 
 
 
 
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Tiny3D.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Tiny3D_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/sfzo/xxhash.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/driver.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods1.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods2.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods3.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods4.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods5.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods6.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods7.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods8.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/GenericMethods9.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics1.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics10.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics11.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics12.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics13.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics14.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics15.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics16.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics17.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics18.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics19.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics2.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics3.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics4.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics5.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics6.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics7.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics8.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics9.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Generics_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions1.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions10.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions11.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions12.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions13.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions14.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions15.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions16.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions17.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions18.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions19.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions2.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions3.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions4.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions5.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions6.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions7.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions8.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Il2CppGenericComDefinitions9.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/ModuleInitializers.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/mscorlib.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/mscorlib_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/netstandard.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/StaticInitialization.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/StringLiterals.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/TinyMethods.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/TinyTypes.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Burst.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Collections.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Collections.LowLevel.ILSupport.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Collections_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Entities.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Entities.Runtime.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Entities.Runtime_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Entities1.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Entities2.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Entities3.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Entities4.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Entities_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Jobs.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.LowLevel.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Mathematics.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Mathematics.Extensions.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Mathematics_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Platforms.Common.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Platforms.RunLoop.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Properties.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Properties.Reflection.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Runtime.EntryPoint.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Runtime.EntryPoint_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Scenes.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Scenes_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Serialization.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Tiny.Burst.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Tiny.Core.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Tiny.Core_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Tiny.IO.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Tiny.UnityInstance.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Tiny.UnityInstance_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Transforms.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Transforms1.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.Transforms_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.ZeroJobs.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/Unity.ZeroJobs_StaticConstructors.o",
-"artifacts/Tiny3D/tiny3d-wasm/emh2/UnsafeUtility.o",
-"artifacts/libil2cpptiny/tiny3d-wasm/libil2cpptiny.bc",
-"artifacts/boehm-gc/tiny3d-wasm/boehm-gc.bc",
-"artifacts/lib_unity_tiny_burst/tiny3d-wasm/lib_unity_tiny_burst.bc",
-"artifacts/lib_unity_zerojobs/tiny3d-wasm/lib_unity_zerojobs.bc",
-"artifacts/lib_unity_lowlevel/tiny3d-wasm/lib_unity_lowlevel.bc",
-"artifacts/lib_unity_tiny_io/tiny3d-wasm/lib_unity_tiny_io.bc",
-"artifacts/lib_unity_entities/tiny3d-wasm/lib_unity_entities.bc",
-"artifacts/lib_unity_tiny_core/tiny3d-wasm/lib_unity_tiny_core.bc",
-"artifacts/lib_unity_platforms_common/tiny3d-wasm/lib_unity_platforms_common.bc",
-"artifacts/lib_unity_platforms_runloop/tiny3d-wasm/lib_unity_platforms_runloop.bc",
-"artifacts/Stevedore/nativejobs-WebGL-s_0707/lib/webgl_wasm/develop/libnativejobs.bc",
+. "artifacts\Stevedore\winpython2-x64_740e\WinPython-64bit-2.7.13.1Zero\python-2.7.13.amd64\python.exe" "artifacts\Stevedore\emscripten-win\emcc.py" --memory-init-file 0 -s USE_PTHREADS=0 -s WASM=1 -O1 -g0 --llvm-lto 0 -s NO_EXIT_RUNTIME=1 -s "PRECISE_F32=0" -s "DISABLE_EXCEPTION_CATCHING=1" -s "ASSERTIONS=1" -s "USE_WEBGL2=1" -s "MEMFS_APPEND_TO_TYPED_ARRAYS=1" -s "LEGACY_GL_EMULATION=0" -s "ERROR_ON_UNDEFINED_SYMBOLS=1" -s "NO_FILESYSTEM=1" -s "ENVIRONMENT=web" -s "PROXY_POSIX_SOCKETS=0" -s "EVAL_CTORS=0" -s "SUPPORT_ERRNO=0" -s "FETCH_SUPPORT_INDEXEDDB=0" -s "USE_FETCH_WORKER=0" -s "ALLOW_MEMORY_GROWTH=1" -s "GL_DISABLE_HALF_FLOAT_EXTENSION_IF_BROKEN=1" -s "MALLOC=emmalloc" -s "DEMANGLE_SUPPORT=1" "artifacts/SlicesSDK/slicessdk-examplebuild/sfzo/xxhash.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/driver.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/GenericMethods.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Generics.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Generics_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Il2CppGenericComDefinitions.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/ModuleInitializers.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/mscorlib.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/mscorlib_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/netstandard.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/SlicesSDK.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/SlicesSDK_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/StaticInitialization.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/StringLiterals.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/TinyMethods.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/TinyTypes.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Burst.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Collections.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Collections.LowLevel.ILSupport.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Collections_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Entities.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Entities.Runtime.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Entities1.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Entities_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Jobs.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.LowLevel.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Mathematics.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Mathematics.Extensions.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Platforms.Common.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Platforms.RunLoop.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Properties.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Properties.Reflection.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Scenes.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Serialization.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Tiny.Burst.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Tiny.Core.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Tiny.Image2D.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Tiny.Image2D.Web.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Tiny.IO.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Tiny.Rendering.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Tiny.Rendering.Native.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Tiny.Web.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Tiny.Web_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.Transforms.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.ZeroJobs.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/Unity.ZeroJobs_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/2n67/UnsafeUtility.o" -o "artifacts/SlicesSDK/slicessdk-examplebuild/SlicesSDK.html" "artifacts/libil2cpptiny/slicessdk-examplebuild/libil2cpptiny.bc" "artifacts/boehm-gc/slicessdk-examplebuild/boehm-gc.bc" --pre-js "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/WebSupport/tiny_runtime.js" "artifacts/lib_unity_tiny_rendering_native/slicessdk-examplebuild/lib_unity_tiny_rendering_native.bc" "artifacts/lib_unity_tiny_web/slicessdk-examplebuild/lib_unity_tiny_web.bc" "artifacts/lib_unity_tiny_burst/slicessdk-examplebuild/lib_unity_tiny_burst.bc" "artifacts/lib_unity_zerojobs/slicessdk-examplebuild/lib_unity_zerojobs.bc" "artifacts/lib_unity_lowlevel/slicessdk-examplebuild/lib_unity_lowlevel.bc" "artifacts/lib_unity_tiny_io/slicessdk-examplebuild/lib_unity_tiny_io.bc" "artifacts/lib_unity_platforms_runloop/slicessdk-examplebuild/lib_unity_platforms_runloop.bc" "artifacts/lib_unity_entities/slicessdk-examplebuild/lib_unity_entities.bc" "artifacts/lib_unity_tiny_core/slicessdk-examplebuild/lib_unity_tiny_core.bc" "artifacts/lib_unity_tiny_image2d_web/slicessdk-examplebuild/lib_unity_tiny_image2d_web.bc" "artifacts/lib_unity_platforms_common/slicessdk-examplebuild/lib_unity_platforms_common.bc" "artifacts/Stevedore/nativejobs-WebGL-s_0707/lib/webgl_wasm/develop/libnativejobs.bc" --js-library "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/Unity.ZeroJobs/js~/HTMLWrapper.js" --js-library "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/Unity.ZeroJobs/js~/PlayerConnectionHTML.js" --js-library "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.dots.runtime@0.32.0-preview.54/Unity.Tiny.IO/js~/TinyIO.js" --js-library "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.tiny.web@0.32.0-preview.54/Runtime/Unity.Tiny.Image2D.Web/js~/ImageLoadingHTML.js" --post-js "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.tiny.web@0.32.0-preview.54/Runtime/Unity.Tiny.Image2D.Web/external/libwebp.js" --pre-js "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.tiny.web@0.32.0-preview.54/Runtime/Unity.Tiny.Web/prejs~/SendMessage.js" --js-library "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.tiny.web@0.32.0-preview.54/Runtime/Unity.Tiny.Web/js~/HTMLWrapper.js" -lGL -s FETCH=1 -s TOTAL_STACK=512KB -s TOTAL_MEMORY=2MB -s ALLOW_MEMORY_GROWTH=1 -s MINIFY_HTML=0 -s ASSERTIONS=0 -s SAFE_HEAP=0 --no-entry -s STANDALONE_WASM -s "EXPORTED_FUNCTIONS=@artifacts/SlicesSDK/slicessdk-examplebuild/exported_functions" -s "-Wl,--export-table"
+
+
+. .\artifacts\Stevedore\winpython2-x64_740e\WinPython-64bit-2.7.13.1Zero\python-2.7.13.amd64\python.exe .\artifacts\Stevedore\emscripten-win\emcc.py --memory-init-file 0 -s USE_PTHREADS=0 -s WASM=1 -Oz -g3 --llvm-lto 0 -s NO_EXIT_RUNTIME=1 -s "PRECISE_F32=0" -s "DISABLE_EXCEPTION_CATCHING=1" -s "ASSERTIONS=0" -s "USE_WEBGL2=1" -s "MEMFS_APPEND_TO_TYPED_ARRAYS=1" -s "LEGACY_GL_EMULATION=0" -s "ERROR_ON_UNDEFINED_SYMBOLS=1" -s "NO_FILESYSTEM=1" -s "ENVIRONMENT=web" -s "PROXY_POSIX_SOCKETS=0" -s "EVAL_CTORS=0" -s "SUPPORT_ERRNO=0" -s "FETCH_SUPPORT_INDEXEDDB=0" -s "USE_FETCH_WORKER=0" -s "ALLOW_MEMORY_GROWTH=1" -s "GL_DISABLE_HALF_FLOAT_EXTENSION_IF_BROKEN=1" -s "MALLOC=emmalloc" -s "AGGRESSIVE_VARIABLE_ELIMINATION=1" "artifacts/SlicesSDK/slicessdk-examplebuild/sfzo/xxhash.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/driver.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods1.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods2.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/GenericMethods3.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics1.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics2.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics3.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics4.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics5.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Generics_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions1.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions2.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions3.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions4.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Il2CppGenericComDefinitions5.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/ModuleInitializers.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/mscorlib.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/mscorlib_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/netstandard.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/SlicesSDK.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/SlicesSDK_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/StaticInitialization.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/StringLiterals.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/TinyMethods.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/TinyTypes.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Burst.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Collections.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Collections.LowLevel.ILSupport.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Collections_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Entities.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Entities.Runtime.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Entities.Runtime_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Entities1.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Entities2.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Entities3.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Entities_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Jobs.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.LowLevel.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Mathematics.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Mathematics.Extensions.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Mathematics_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Platforms.Common.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Platforms.RunLoop.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Properties.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Properties.Reflection.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Runtime.EntryPoint.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Runtime.EntryPoint_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Scenes.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Scenes_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Serialization.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Tiny.Burst.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Tiny.IO.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Tiny.UnityInstance.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Tiny.UnityInstance_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Transforms.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.Transforms_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.ZeroJobs.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/Unity.ZeroJobs_StaticConstructors.o" "artifacts/SlicesSDK/slicessdk-examplebuild/eiu8/UnsafeUtility.o" -o "artifacts/SlicesSDK/slicessdk-examplebuild/SlicesSDK.html" "artifacts/libil2cpptiny/slicessdk-examplebuild/libil2cpptiny.bc" "artifacts/boehm-gc/slicessdk-examplebuild/boehm-gc.bc" --pre-js "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/WebSupport/tiny_runtime.js" "artifacts/lib_unity_tiny_burst/slicessdk-examplebuild/lib_unity_tiny_burst.bc" "artifacts/lib_unity_zerojobs/slicessdk-examplebuild/lib_unity_zerojobs.bc" "artifacts/lib_unity_lowlevel/slicessdk-examplebuild/lib_unity_lowlevel.bc" "artifacts/lib_unity_tiny_io/slicessdk-examplebuild/lib_unity_tiny_io.bc" "artifacts/lib_unity_platforms_runloop/slicessdk-examplebuild/lib_unity_platforms_runloop.bc" "artifacts/lib_unity_platforms_common/slicessdk-examplebuild/lib_unity_platforms_common.bc" "artifacts/lib_unity_entities/slicessdk-examplebuild/lib_unity_entities.bc" "artifacts/Stevedore/nativejobs-WebGL-s_0707/lib/webgl_wasm/release/libnativejobs.bc" --js-library "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/Unity.ZeroJobs/js~/HTMLWrapper.js" --js-library "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/Unity.ZeroJobs/js~/PlayerConnectionHTML.js" --js-library "C:/Developer/ProjectTinySamples/Tiny3D/Packages/com.unity.dots.runtime@0.32.0-preview.54/Unity.Tiny.IO/js~/TinyIO.js" -flto -lGL -s FETCH=1 -s TOTAL_STACK=512KB -s TOTAL_MEMORY=128MB -s ALLOW_MEMORY_GROWTH=0 -s MINIFY_HTML=0 -s ASSERTIONS=0 -s SAFE_HEAP=0 --no-entry -s STANDALONE_WASM -s "EXPORTED_FUNCTIONS=@/artifacts/SlicesSDK/slicessdk-examplebuild/exported_functions"
 
 
 
 
+What are the facades for? It appears the dlls are compiling down with these. Why?
+artifacts/Stevedore/refassemblies-netstandard2_e589/Facades/
 
+What is ILPostProcessor?
+"artifacts/ILPostProcessorRunner.exe/HostDotNet/ILPostProcessorRunner.exe"
 
-"artifacts/uWAVMTests/uwavmtests-uwavm/sfzo/xxhash.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/driver.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods2.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods3.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/GenericMethods4.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics2.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics3.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics4.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics5.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics6.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics7.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Generics_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions2.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions3.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions4.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions5.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions6.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Il2CppGenericComDefinitions7.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/ModuleInitializers.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/mscorlib.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/mscorlib_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/netstandard.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/StaticInitialization.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/StringLiterals.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/TinyMethods.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/TinyTypes.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Burst.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Collections.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Collections.LowLevel.ILSupport.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Collections_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities.Runtime.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities.Runtime_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities2.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities3.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities4.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Entities_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Jobs.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.LowLevel.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Mathematics.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Mathematics.Extensions.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Mathematics_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Platforms.Common.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Platforms.RunLoop.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Properties.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Properties.Reflection.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Runtime.EntryPoint.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Runtime.EntryPoint_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Scenes.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Scenes_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Serialization.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Tiny.Burst.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Tiny.IO.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Tiny.UnityInstance.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Tiny.UnityInstance_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Transforms.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Transforms1.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.Transforms_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.ZeroJobs.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/Unity.ZeroJobs_StaticConstructors.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/UnsafeUtility.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/uWAVMBehaviour.o"
-"artifacts/uWAVMTests/uwavmtests-uwavm/gs4f/uWAVMTests.o"
--o
-"artifacts/uWAVMTests/uwavmtests-uwavm/uWAVMTests.js"
-"artifacts/libil2cpptiny/uwavmtests-uwavm/libil2cpptiny.bc"
-"artifacts/boehm-gc/uwavmtests-uwavm/boehm-gc.bc"
---pre-js
-"C:/Developer/ProjectTinySamples/Tiny3D/Library/PackageCache/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/WebSupport/tiny_runtime.js"
-"artifacts/lib_unity_tiny_burst/uwavmtests-uwavm/lib_unity_tiny_burst.bc"
-"artifacts/lib_unity_zerojobs/uwavmtests-uwavm/lib_unity_zerojobs.bc"
-"artifacts/lib_unity_lowlevel/uwavmtests-uwavm/lib_unity_lowlevel.bc"
-"artifacts/lib_unity_tiny_io/uwavmtests-uwavm/lib_unity_tiny_io.bc"
-"artifacts/lib_unity_platforms_runloop/uwavmtests-uwavm/lib_unity_platforms_runloop.bc"
-"artifacts/lib_unity_platforms_common/uwavmtests-uwavm/lib_unity_platforms_common.bc"
-"artifacts/lib_unity_entities/uwavmtests-uwavm/lib_unity_entities.bc"
-"artifacts/Stevedore/nativejobs-WebGL-s_0707/lib/webgl_wasm/develop/libnativejobs.bc"
---js-library
-"C:/Developer/ProjectTinySamples/Tiny3D/Library/PackageCache/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/Unity.ZeroJobs/js~/HTMLWrapper.js"
---js-library
-"C:/Developer/ProjectTinySamples/Tiny3D/Library/PackageCache/com.unity.dots.runtime@0.32.0-preview.54/LowLevelSupport~/Unity.ZeroJobs/js~/PlayerConnectionHTML.js"
---js-library
-"C:/Developer/ProjectTinySamples/Tiny3D/Library/PackageCache/com.unity.dots.runtime@0.32.0-preview.54/Unity.Tiny.IO/js~/TinyIO.js"
+What is TypeRegen?

@@ -49,7 +49,6 @@ namespace uWASM
             LinkTransformFuncs();
             
             m_Instance = m_Linker.Instantiate(m_Store, m_Module);
-
             m_Memory = m_Instance.GetMemory(m_Store, "memory");
 
             m_InstanceFuncs.Add("uWASM.TransformRotater", m_Instance.GetFunction(m_Store, "TransformRotater_CreateInstance_mDE5066AA9865D91FB9FEBFD70EAF7B1A4E00B45B"));

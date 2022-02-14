@@ -123,130 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &275341822
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 275341827}
-  - component: {fileID: 275341826}
-  - component: {fileID: 275341825}
-  - component: {fileID: 275341824}
-  - component: {fileID: 275341823}
-  m_Layer: 0
-  m_Name: TransformRotationTestWASMTime (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &275341823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275341822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e0c0bc21a97c224d921567eeda6ebfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Behaviour:
-    rid: 7886925047865540660
-  m_Engine: {fileID: 0}
-  m_PropertyList:
-  - fieldName: m_Behaviour.m_YRotation
-    objectInstance: {fileID: 0}
-    intValue: 3000
-  references:
-    version: 2
-    RefIds:
-    - rid: 7886925047865540660
-      type: {class: TransformRotater, ns: uWASM, asm: uWASMTests}
-      data:
-        m_YRotation: 3000
---- !u!65 &275341824
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275341822}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &275341825
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275341822}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &275341826
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275341822}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &275341827
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275341822}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.044, y: -0.604, z: 0.934}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +231,7 @@ GameObject:
   - component: {fileID: 815060839}
   - component: {fileID: 815060838}
   m_Layer: 0
-  m_Name: TransformRotationTestWASMTime
+  m_Name: RefTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -439,19 +315,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Behaviour:
-    rid: 7886925047865540660
+    rid: 888282870224257024
   m_Engine: {fileID: 0}
   m_PropertyList:
-  - fieldName: m_Behaviour.m_YRotation
-    objectInstance: {fileID: 0}
-    intValue: 47
+  - fieldName: m_Behaviour.m_RefTestWasm
+    objectInstance: {fileID: 1328434771}
+    intValue: 0
+  - fieldName: m_Behaviour.m_Collider
+    objectInstance: {fileID: 815060839}
+    intValue: 0
+  - fieldName: m_Behaviour.m_TransformRef
+    objectInstance: {fileID: 815060837}
+    intValue: 0
   references:
     version: 2
     RefIds:
-    - rid: 7886925047865540660
-      type: {class: TransformRotater, ns: uWASM, asm: uWASMTests}
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 888282870224257024
+      type: {class: RefTestWasm, ns: uWASM, asm: uWASMTests}
       data:
-        m_YRotation: 47
+        m_RefTestWasm:
+          rid: -2
+        m_Collider:
+          rid: -2
+        m_TransformRef:
+          rid: -2
 --- !u!65 &815060839
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -584,7 +473,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1817404831
+--- !u!1 &1328434770
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -592,64 +481,77 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1817404836}
-  - component: {fileID: 1817404835}
-  - component: {fileID: 1817404834}
-  - component: {fileID: 1817404833}
-  - component: {fileID: 1817404832}
+  - component: {fileID: 1328434775}
+  - component: {fileID: 1328434774}
+  - component: {fileID: 1328434773}
+  - component: {fileID: 1328434772}
+  - component: {fileID: 1328434771}
   m_Layer: 0
-  m_Name: TransformRotationTestWASMTime (2)
+  m_Name: RefTest2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1817404832
+--- !u!114 &1328434771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817404831}
+  m_GameObject: {fileID: 1328434770}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e0c0bc21a97c224d921567eeda6ebfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Behaviour:
-    rid: 7886925047865540660
+    rid: 888282870224257024
   m_Engine: {fileID: 0}
   m_PropertyList:
-  - fieldName: m_Behaviour.m_YRotation
+  - fieldName: m_Behaviour.m_RefTestWasm
     objectInstance: {fileID: 0}
-    intValue: 959
+    intValue: 0
+  - fieldName: m_Behaviour.m_Collider
+    objectInstance: {fileID: 1328434772}
+    intValue: 0
+  - fieldName: m_Behaviour.m_TransformRef
+    objectInstance: {fileID: 1328434775}
+    intValue: 0
   references:
     version: 2
     RefIds:
-    - rid: 7886925047865540660
-      type: {class: TransformRotater, ns: uWASM, asm: uWASMTests}
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 888282870224257024
+      type: {class: RefTestWasm, ns: uWASM, asm: uWASMTests}
       data:
-        m_YRotation: 959
---- !u!65 &1817404833
+        m_RefTestWasm:
+          rid: -2
+        m_Collider:
+          rid: -2
+        m_TransformRef:
+          rid: -2
+--- !u!65 &1328434772
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817404831}
+  m_GameObject: {fileID: 1328434770}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1817404834
+--- !u!23 &1328434773
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817404831}
+  m_GameObject: {fileID: 1328434770}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -685,26 +587,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1817404835
+--- !u!33 &1328434774
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817404831}
+  m_GameObject: {fileID: 1328434770}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1817404836
+--- !u!4 &1328434775
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817404831}
+  m_GameObject: {fileID: 1328434770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.947, y: 0.398, z: 0.937}
+  m_LocalPosition: {x: 0.518, y: 0, z: 1.059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

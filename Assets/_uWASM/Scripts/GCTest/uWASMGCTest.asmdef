@@ -1,0 +1,16 @@
+{
+    "name": "uWASMGCTest",
+    "rootNamespace": "",
+    "references": [
+        "GUID:16db88137fb540b4e9daa48efbf8bdbc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

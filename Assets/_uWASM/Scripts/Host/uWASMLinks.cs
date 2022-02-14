@@ -322,8 +322,10 @@ public static class uWASMLinks
     {
         //  (import "env" "js_html_playerconnectionDisconnect" (func $js_html_playerconnectionDisconnect (type 5)))
         //  (type (;5;) (func))
-        linker.Define("env", "js_html_playerconnectionDisconnect",
-            Function.FromCallback(store, () => { Debug.LogWarning($"js_html_playerconnectionDisconnect"); })
+        linker.Define("env", "js_html_playerconnectionDisconnect", Function.FromCallback(store, () =>
+            {
+                Debug.LogWarning($"js_html_playerconnectionDisconnect");
+            })
         );
         //  (import "env" "js_html_playerconnectionReceive" (func $js_html_playerconnectionReceive (type 3)))
         //  (type (;3;) (func (param i32 i32) (result i32)))
@@ -335,8 +337,10 @@ public static class uWASMLinks
         );
         //  (import "env" "js_html_init" (func $js_html_init (type 5)))
         //  (type (;5;) (func))
-        linker.Define("env", "js_html_init",
-            Function.FromCallback(store, () => { Debug.LogWarning($"js_html_init"); })
+        linker.Define("env", "js_html_init", Function.FromCallback(store, () =>
+            {
+                Debug.LogWarning($"js_html_init");
+            })
         );
         //  (import "env" "js_html_playerconnectionSend" (func $js_html_playerconnectionSend (type 3)))
         //  (type (;3;) (func (param i32 i32) (result i32)))
@@ -348,13 +352,17 @@ public static class uWASMLinks
         );
         //  (import "env" "js_html_playerconnectionPlatformShutdown" (func $js_html_playerconnectionPlatformShutdown (type 5)))
         //  (type (;5;) (func))
-        linker.Define("env", "js_html_playerconnectionPlatformShutdown",
-            Function.FromCallback(store, () => { Debug.LogWarning($"js_html_playerconnectionPlatformShutdown"); })
+        linker.Define("env", "js_html_playerconnectionPlatformShutdown", Function.FromCallback(store, () =>
+            {
+                Debug.LogWarning($"js_html_playerconnectionPlatformShutdown");
+            })
         );
         //  (import "env" "js_html_playerconnectionPlatformInit" (func $js_html_playerconnectionPlatformInit (type 5)))
         //  (type (;5;) (func))
-        linker.Define("env", "js_html_playerconnectionPlatformInit",
-            Function.FromCallback(store, () => { Debug.LogWarning($"js_html_playerconnectionPlatformInit"); })
+        linker.Define("env", "js_html_playerconnectionPlatformInit", Function.FromCallback(store, () =>
+            {
+                Debug.LogWarning($"js_html_playerconnectionPlatformInit");
+            })
         );
         //  (import "env" "js_html_playerconnectionLostConnection" (func $js_html_playerconnectionLostConnection (type 8)))
         //  (type (;8;) (func (result i32)))
@@ -374,18 +382,29 @@ public static class uWASMLinks
         );
         //  (import "env" "js_html_playerconnectionConnect" (func $js_html_playerconnectionConnect (type 1)))
         //  (type (;1;) (func (param i32)))
-        linker.Define("env", "js_html_playerconnectionConnect",
-            Function.FromCallback(store, (int a) => { Debug.LogWarning($"js_html_playerconnectionConnect"); })
+        linker.Define("env", "js_html_playerconnectionConnect", Function.FromCallback(store, (int a) =>
+            {
+                Debug.LogWarning($"js_html_playerconnectionConnect");
+            })
         );
     }
 
     public static void AddEmscriptenTinyLinks(Linker linker, Store store)
     {
+        //  (import "env" "emscripten_performance_now" (func $emscripten_performance_now (type 21)))
+        //  (type (;21;) (func (result f64)))
+        linker.Define("env", "emscripten_performance_now", Function.FromCallback(store, () =>
+            {
+                Debug.LogWarning($"emscripten_performance_now");
+                return 0.0d;
+            })
+        );
+        
         //  (import "env" "emscripten_is_main_browser_thread" (func $emscripten_is_main_browser_thread (type 8)))
         //  (type (;8;) (func (result i32)))
         linker.Define("env", "emscripten_is_main_browser_thread", Function.FromCallback(store, () =>
             {
-                Debug.LogWarning($"emscripten_is_main_browser_thread");
+                // Debug.LogWarning($"emscripten_is_main_browser_thread");
                 return 1;
             })
         );
@@ -399,35 +418,47 @@ public static class uWASMLinks
         );
         //  (import "env" "emscripten_throw_string" (func $emscripten_throw_string (type 1)))
         //  (type (;1;) (func (param i32)))
-        linker.Define("env", "emscripten_throw_string",
-            Function.FromCallback(store, (int a) => { Debug.LogWarning($"emscripten_throw_string {a}"); })
-        );
+        // linker.Define("env", "emscripten_throw_string", Function.FromCallback(store, (int a) =>
+        //     {
+        //         string result = memory.ReadString(store, a, 0);
+        //         Debug.LogWarning($"emscripten_throw_string {a} {result}");
+        //     })
+        // );
         //  (import "env" "emscripten_start_fetch" (func $emscripten_start_fetch (type 1)))
         //  (type (;1;) (func (param i32)))
-        linker.Define("env", "emscripten_start_fetch",
-            Function.FromCallback(store, (int a) => { Debug.LogWarning($"emscripten_start_fetch {a}"); })
+        linker.Define("env", "emscripten_start_fetch", Function.FromCallback(store, (int a) =>
+            {
+                Debug.LogWarning($"emscripten_start_fetch {a}");
+            })
         );
         //  (import "env" "emscripten_set_timeout_loop" (func $emscripten_set_timeout_loop (type 60)))
         //  (type (;60;) (func (param i32 f64 i32)))
-        linker.Define("env", "emscripten_set_timeout_loop",
-            Function.FromCallback(store,
-                (int a, double b, int c) => { Debug.LogWarning($"emscripten_set_timeout_loop {a} {b} {c}"); })
+        linker.Define("env", "emscripten_set_timeout_loop", Function.FromCallback(store, (int a, double b, int c) =>
+            {
+                Debug.LogWarning($"emscripten_set_timeout_loop {a} {b} {c}");
+            })
         );
         //  (import "env" "emscripten_request_animation_frame_loop" (func $emscripten_request_animation_frame_loop (type 0)))
         //  (type (;0;) (func (param i32 i32)))
-        linker.Define("env", "emscripten_request_animation_frame_loop",
-            Function.FromCallback(store,
-                (int a, int b) => { Debug.LogWarning($"emscripten_request_animation_frame_loop {a} {b}"); })
-        );
+        // linker.Define("env", "emscripten_request_animation_frame_loop", Function.FromCallback(store, (int a, int b) =>
+        //     {
+        //         
+        //         Debug.LogWarning($"emscripten_request_animation_frame_loop {a} {b}");
+        //     })
+        // );
         //  (import "env" "emscripten_notify_memory_growth" (func $emscripten_notify_memory_growth (type 1)))
         //  (type (;1;) (func (param i32)))
-        linker.Define("env", "emscripten_notify_memory_growth",
-            Function.FromCallback(store, (int a) => { Debug.LogWarning($"emscripten_notify_memory_growth {a}"); })
+        linker.Define("env", "emscripten_notify_memory_growth", Function.FromCallback(store, (int a) =>
+            {
+                Debug.LogWarning($"emscripten_notify_memory_growth {a}");
+            })
         );
         //  (import "env" "_emscripten_fetch_free" (func $_emscripten_fetch_free (type 1)))
         //  (type (;1;) (func (param i32)))
-        linker.Define("env", "_emscripten_fetch_free",
-            Function.FromCallback(store, (int a) => { Debug.LogWarning($"_emscripten_fetch_free {a}"); })
+        linker.Define("env", "_emscripten_fetch_free", Function.FromCallback(store, (int a) =>
+            {
+                Debug.LogWarning($"_emscripten_fetch_free {a}");
+            })
         );
     }
 
@@ -435,8 +466,10 @@ public static class uWASMLinks
     {
         //  (import "env" "JS_Log_StackTrace" (func $JS_Log_StackTrace (type 2)))
         //  (type (;2;) (func (param i32 i32)))
-        linker.Define("env", "JS_Log_StackTrace",
-            Function.FromCallback(store, (int a, int b) => { Debug.LogWarning($"JS_Log_StackTrace {a} {b}"); })
+        linker.Define("env", "JS_Log_StackTrace", Function.FromCallback(store, (int a, int b) =>
+            {
+                Debug.LogWarning($"JS_Log_StackTrace {a} {b}");
+            })
         );
         //  (import "env" "JS_SystemInfo_GetMemory" (func $JS_SystemInfo_GetMemory (type 11)))
         //  (type (;11;) (func (result i32)))
@@ -448,8 +481,10 @@ public static class uWASMLinks
         );
         //  (import "env" "JS_Log_Dump" (func $JS_Log_Dump (type 2)))
         //  (type (;2;) (func (param i32 i32)))
-        linker.Define("env", "JS_Log_Dump",
-            Function.FromCallback(store, (int a, int b) => { Debug.LogWarning($"JS_Log_Dump {a} {b}"); })
+        linker.Define("env", "JS_Log_Dump", Function.FromCallback(store, (int a, int b) =>
+            {
+                Debug.LogWarning($"JS_Log_Dump {a} {b}");
+            })
         );
     }
 
@@ -655,27 +690,24 @@ public static class uWASMLinks
 
         //  (type (;18;) (func (param i32 i32 i32 i32 i32 i32) (result i32)))
         const string invokeiiiiii = "invoke_iiiiii";
-        linker.Define("env", invokeiiiiii, Function.FromCallback(store,
-            (int index, int a1, int a2, int a3, int a4, int a5) =>
+        linker.Define("env", invokeiiiiii, Function.FromCallback(store, (int index, int a1, int a2, int a3, int a4, int a5) =>
             {
+                Debug.Log($"{invokeiiiiii} {index} {a1} {a2} {a3} {a4} {a5}");
+                var s = stackSaveFunc.Invoke(store);
+                try
                 {
-                    Debug.Log($"{invokeiiiiii} {index} {a1} {a2} {a3} {a4} {a5}");
-                    var s = stackSaveFunc.Invoke(store);
-                    try
-                    {
-                        if (table.GetElement(store, (uint) index) is Function func)
-                            return func.Invoke(store, a1, a2, a3, a4, a5) as int? ?? 0;
-                        Debug.LogError($"{invokeiiiiii} func not found!");
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogError($"{invokeiiiiii} {index} {a1} {a2} {a3} {a4} {a5} {e}");
-                        if (s is int stack)
-                            stackRestoreFunc.Invoke(store, stack);
-                    }
-
-                    return 0;
+                    if (table.GetElement(store, (uint) index) is Function func)
+                        return func.Invoke(store, a1, a2, a3, a4, a5) as int? ?? 0;
+                    Debug.LogError($"{invokeiiiiii} func not found!");
                 }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{invokeiiiiii} {index} {a1} {a2} {a3} {a4} {a5} {e}");
+                    if (s is int stack)
+                        stackRestoreFunc.Invoke(store, stack);
+                }
+
+                return 0;
             })
         );
 
