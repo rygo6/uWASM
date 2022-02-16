@@ -22,15 +22,6 @@ namespace uWASM
             return behavior;
         }
 
-        // public static int CreateInstance(Type type)
-        // {
-        //     WASMBehavior instance = (WASMBehavior) Activator.CreateInstance(type);
-        //     int hash = instance.GetHashCode();
-        //     m_InstanceDictionary.Add(hash, instance);
-        //     m_InstanceList.Add(instance);
-        //     return hash;
-        // }
-
         [Preserve]
         public static void AwakeBehaviour(int instanceId)
         {
@@ -53,13 +44,6 @@ namespace uWASM
         public static int TestGCAddString()
         {
             m_TestList.Add("Count: " + m_TestList.Count);
-            return m_TestList.Count;
-        }
-
-        [Preserve]
-        public static int TestGCRemoveString()
-        {
-            if (m_TestList.Count > 0) m_TestList.RemoveAt(0);
             return m_TestList.Count;
         }
 

@@ -387,6 +387,35 @@ public static class uWASMLinks
                 Debug.LogWarning($"js_html_playerconnectionConnect");
             })
         );
+        //  (import "env" "emscripten_trace_record_free" (func (;12;) (type 0)))
+        //  (type (;0;) (func (param i32)))
+        linker.Define("env", "emscripten_trace_record_free", Function.FromCallback(store, (int a) =>
+            {
+                Debug.LogWarning($"emscripten_trace_record_free");
+            })
+        );
+        //  (import "env" "emscripten_trace_record_reallocation" (func (;13;) (type 6)))
+        //  (type (;6;) (func (param i32 i32 i32)))
+        linker.Define("env", "emscripten_trace_record_reallocation", Function.FromCallback(store, (int a, int b, int c) =>
+            {
+                Debug.LogWarning($"emscripten_trace_record_reallocation");
+            })
+        );
+        //  (import "env" "emscripten_trace_record_allocation" (func (;14;) (type 1)))
+        //  (type (;1;) (func (param i32 i32)))
+        linker.Define("env", "emscripten_trace_record_allocation", Function.FromCallback(store, (int a, int b) =>
+            {
+                Debug.LogWarning($"emscripten_trace_record_allocation");
+            })
+        );
+        //  (import "env" "emscripten_asm_const_iii" (func (;18;) (type 5)))
+        //  (type (;5;) (func (param i32 i32 i32) (result i32)))
+        linker.Define("env", "emscripten_asm_const_iii", Function.FromCallback(store, (int a, int b, int c) =>
+            {
+                Debug.LogWarning($"emscripten_asm_const_iii");
+                return 0;
+            })
+        );
     }
 
     public static void AddEmscriptenTinyLinks(Linker linker, Store store)

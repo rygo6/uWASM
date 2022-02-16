@@ -5,10 +5,14 @@ $env:EM_CONFIG = 'C:\Developer\ProjectTinySamples\Tiny3D\Library\DotsRuntimeBuil
 $env:EMSDK_PYTHON = 'C:\Developer\ProjectTinySamples\Tiny3D\Library\DotsRuntimeBuild\artifacts\Stevedore\winpython2-x64_740e\WinPython-64bit-2.7.13.1Zero\python-2.7.13.amd64\python.exe'
 $env:EMCC_SKIP_SANITY_CHECK = '1'
 
-cd C:\Developer\ProjectTinySamples\Tiny3D\Library\DotsRuntimeBuild
+cd C:\Developer\SlicesSDKTinyPOC\Library\DotsRuntimeBuild\
 . .\artifacts\Stevedore\winpython2-x64_740e\WinPython-64bit-2.7.13.1Zero\python-2.7.13.amd64\python.exe .\artifacts\Stevedore\emscripten-win\emcc.py "@artifacts\rsp\StandaloneTest.rsp"
-wasm2wat.exe .\artifacts\SlicesSDK\slicessdk-examplebuild\SlicesSDK.wasm -o .\artifacts\SlicesSDK\slicessdk-examplebuild\SlicesSDK.wat
+wasm2wat.exe .\artifacts\SlicesSDKExample\slicessdkexample-examplebuild\SlicesSDKExample.wasm -o .\artifacts\SlicesSDKExample\slicessdkexample-examplebuild\SlicesSDKExample.wat
 
+
+-s "EXPORTED_FUNCTIONS=@artifacts/SlicesSDK/slicessdk-examplebuild/exported_functions"
+
+-s "EXPORTED_FUNCTIONS=["_main"]"
 
 
 It appears like I probably want to make an entirely new CSharpApplication.bee.cs for bee.

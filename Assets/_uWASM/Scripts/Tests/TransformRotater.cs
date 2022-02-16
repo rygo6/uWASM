@@ -15,10 +15,12 @@ namespace uWASM
             int transformInstanceId,
             int yRotation)
         {
-            TransformRotater rotater = new TransformRotater();
-            rotater.m_InstanceID = behaviorInstanceId;
-            rotater.transform = new uWASMTransform(transformInstanceId);
-            rotater.m_YRotation = yRotation;
+            TransformRotater rotater = new TransformRotater
+            {
+                m_InstanceID = behaviorInstanceId,
+                transform = new uWASMTransform(transformInstanceId),
+                m_YRotation = yRotation
+            };
             uWASMAPI.RegisterBehavior(rotater);
         }
         /* End Auto-Generated */
