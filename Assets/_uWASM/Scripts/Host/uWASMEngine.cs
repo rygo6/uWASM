@@ -46,6 +46,22 @@ namespace uWASM
             
             uWASMLinks.AddEmscriptenTinyLinks(m_Linker, m_Store);
             uWASMLinks.AddJSTinyLinks(m_Linker, m_Store);
+            
+            m_Linker.Define("env", "emscripten_request_animation_frame_loop", Function.FromCallback(m_Store, (int cb, int userData) =>
+                {
+                    // Emscripten would keep calling requestAnimationFrame to keep getting a new frame from JS side.
+                    // but in C# we can just store the CB and keep calling it from Update.
+                    Debug.Log($"emscripten_request_animation_frame_loop {cb} {userData}");
+                })
+            );
+            
+            m_Linker.Define("env", "emscripten_throw_string", Function.FromCallback(m_Store, (int a) =>
+                {
+                    string result = m_Memory.ReadNullTerminatedString(m_Store, a);
+                    Debug.LogWarning($"emscripten_throw_string {a} {result}");
+                })
+            );
+            
             LinkTransformFuncs();
             
             m_Instance = m_Linker.Instantiate(m_Store, m_Module);
