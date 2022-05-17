@@ -1,4 +1,0 @@
-<linker>
-	<assembly fullname="uWAVMBehaviour" preserve="all"/>
-	<assembly fullname="uWAVMTests" preserve="all"/>
-</linker>
