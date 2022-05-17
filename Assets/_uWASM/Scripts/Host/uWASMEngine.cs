@@ -49,8 +49,6 @@ namespace uWASM
             
             m_Linker.Define("env", "emscripten_request_animation_frame_loop", Function.FromCallback(m_Store, (int cb, int userData) =>
                 {
-                    // Emscripten would keep calling requestAnimationFrame to keep getting a new frame from JS side.
-                    // but in C# we can just store the CB and keep calling it from Update.
                     Debug.Log($"emscripten_request_animation_frame_loop {cb} {userData}");
                 })
             );
@@ -85,34 +83,6 @@ namespace uWASM
             Debug.Log($"m_StartBehaviourFunc {m_StartBehaviourFunc}");
             m_UpdateBehaviourFunc = m_Instance.GetFunction(m_Store, "uWASMAPI_UpdateBehaviour_m0AA3146EF5A99A7503662C8BE3BF0EFAABA139A0");
             Debug.Log($"m_UpdateBehaviourFunc {m_StartBehaviourFunc}");
-
-            // StartCoroutine(GCTestCoroutine());
-        }
-
-        IEnumerator GCTestCoroutine()
-        {
-            var addFunc = m_Instance.GetFunction(m_Store, "uWASMAPI_TestGCAddString_mDC9A41CEE7130D53882B45497671D599588ABF1E");
-            var delFunc = m_Instance.GetFunction(m_Store, "uWASMAPI_TestGCRemoveString_m227BF4D8C3D1D4E6725F0DA54219BAF53A361A26");
-            int count = 0;
-            
-            while (true)
-            {
-                for (int i = 0; i < 1000; ++i)
-                {
-                    count++;
-                    var addFuncReturn = addFunc?.Invoke(m_Store);
-                }
-                
-                for (int i = 0; i < 1000; ++i)
-                {
-                    count--;
-                    var delFuncReturn = delFunc?.Invoke(m_Store);
-                }
-
-                Debug.Log($"{m_Memory.Minimum} {m_Memory.Maximum} {m_Memory.GetSize(m_Store)} {count}");
-
-                yield return null;
-            }
         }
 
         public void RegisterReference(Object reference)
